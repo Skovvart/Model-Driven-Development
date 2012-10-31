@@ -1,0 +1,47 @@
+\chapter{Threats to Validity}
+\begin{itemize}
+\item Validity of the experiment itself -> Internal Threats
+\item Generalizability of the results -> External Threats
+\item Other types possible (conclusion validity, construct validity)
+\end{itemize}
+
+\section{Internal Validity}
+\begin{itemize}
+\item Is the correlation between the treatment and the outcome casual,
+\item Accidental?
+\item Caused by some third variable that has not been observed.
+\item Example: all programmers in C were faster than programmers in C\#
+\item But ...all the programmers in C\# took the experiment very late at night, when they were tired.
+\item or all the C programmers were experienced engineers, and the C\# programmers were newbies.
+\end{itemize}
+
+\subsection{Main Internal Threats}
+\begin{itemize}
+\item History -- treatments are applied to subject in order at different times. Timing influences results.
+\item Learning -- subjects learn the task over time.
+\item Testing -- subjects should not know the results of the test on the fly (the "election poll" effect)
+\item Mortality -- subjects dropping out during experiment. Is the sample still representative?
+\item Intrusive instrumentation -- the measurement or observing changes the variable being measured.
+\item Statistical insignificance -- the sample is too small. Check experimentation handbooks.
+\item Direction of correlation -- whether A causes B, or B causes A; are there tertiary reasons that cause both A and B.
+\end{itemize}
+
+\textbf{Example 1}
+An internal threat is that our statistics are incorrect. To reduce this risk, we instrumented the native tools to gather the statistics rather than building our own parsers. We thoroughly tested our infrastructure using synthetic test cases and cross-checked overlapping statistics. We tested our formal semantics specification against the native configurators and cross-reviewed the specifications. We used the Boolean abstraction of the semantics to translate both models into Boolean formulas and run a SAT solver on them to find dead features. We found 114 dead features in Linux and 28 in eCos. We manually confirmed that all of them are indeed dead, either because they depended on features from another architecture or they were intentionally deactivated.
+
+\textbf{Example 2}
+Git allows rewriting histories in order to amend existing commits, for example to add forgotten files and improve comments. Since we study the final version of the history, we might miss some aspects of the evolution that has been rewritten using this capability. However, we believe that this is not a major threat, as the final version is what best reflects the intention of developers. Still, we may be missing some errors and problems appearing in the evolution, if they were corrected using history rewriting. This does not invalidate any of our findings, but may mean that more problems exist in practice.
+
+\subsection{External Validity}
+\begin{itemize}
+\item How far examples are generalizable?
+\item Does the sample of subjects allow to conlcude anything about the broader population?
+  \begin{itemize}
+  \item Tested programming speed on students, can we conclude about professionals?
+  \item Tested programming speed on small system level programs; can we conclude about writing web based applications?
+  \end{itemize}
+\item Do you expect similar results in slightly modified conditions?
+\item Normally the question of external validity has to do with interacion of the treatment with the chose sample:
+\item Will treatment give a different outcome for a different sample? (different results expected at ITU and in an EE school)
+\item Does the context interact with the treatment ? (listening to music gives different impression indoors and outdoors)
+\end{itemize}
