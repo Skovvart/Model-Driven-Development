@@ -25,6 +25,7 @@ Regarding programming by contract, there exist tools like Business Object Notati
 
 
 _Method_
+
 We will begin by specifying the structure of the human-readable contracts. 
 We will then implement a prototype BDD-framework in Java using model driven engineering that supports regular BDD-features and additionally formal contracts. 
 Specifically we will use model-to-model transformation or code generation for translating feature descriptions into formal contracts, and code generation to incorporate the contracts into Java/JML. 
