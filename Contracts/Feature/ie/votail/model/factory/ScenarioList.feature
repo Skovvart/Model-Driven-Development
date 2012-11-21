@@ -1,3 +1,37 @@
+Feature: Construct a scenarioList
+    In order to ...
+    I construct a scenario list
+Behavior: Scenario list
+    Ensuring the number of partitions is 'MAX_PARTITIONS'
+    And the bucket size is '0'
+    And the size is '0'
+
+Feature: 
+    In order to ...
+    I want to know if a scenario is in the scenario list
+Behavior:
+    Requiring 'scenario' has a value
+    
+Feature: Add scenario
+    In order to include a scenario
+    I add it to one of the partitions or to the bucket
+    as well as to the master list
+Behavior: Include scenario
+    Requiring 'scenario' has a value
+    Ensuring 'scenario' is member of the scenario list
+    
+Feature: Get number of scenarios
+    Given a number of winners
+    I want to know the number of scenarios
+    or the number of scenarios in the bucket 
+    if there are more winners than partitions
+Behavior: Get scenario count
+    Requires 'numberOfWinners' is a positive number
+    And 'result' is greater than or equal to '0'
+    
+    
+
+    
 /**
  * List of Electoral Scenarios.
  * 
