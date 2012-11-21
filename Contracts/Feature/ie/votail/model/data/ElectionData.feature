@@ -1,59 +1,10 @@
-package ie.votail.model.data;
-
-import ie.votail.model.ElectoralScenario;
-
-import java.io.Serializable;
-
-import election.tally.Ballot;
-
-public class ElectionData implements Serializable {
+Feature: Ballots and scenarios
+  In order to have easy access to ballots and scenarious
+  As a stupid programmer
+  I want to ensure that the program wants as I expect
   
-  /**
-   * 
-   */
-  private static final long serialVersionUID = -8243647007078052844L;
-  protected ElectoralScenario scenario;
-  protected Ballot[] ballots;
-  
-  /**
-   * @return The electoral scenario
-   */
-  public /*@ pure @*/ ElectoralScenario getScenario() {
-    return scenario;
-  }
-  /**
-   * @return the ballotBox
-   */
-  public /*@ pure @*/ Ballot[] getBallots() {
-    Ballot[] theBallots = new Ballot[this.ballots.length];
-    for (int i=0; i < this.ballots.length; i++) {
-      theBallots[i] = this.ballots[i];
-    }
-    return theBallots;
-  }
-  /**
-   * @param theScenario the scenario to set
-   */
-  public void setScenario(final ElectoralScenario theScenario) {
-    this.scenario = theScenario.canonical();
-  }
-  /**
-   * @param ballotBox the ballotBox to set
-   */
-  public void setBallots(final Ballot[] ballotsToSet) {
-    int numberOfBallots = 0;
-    for (int i=0; i < ballotsToSet.length; i++) {
-      if (ballotsToSet[i] !=null) {
-        numberOfBallots++;
-      }
-    }
-    this.ballots = new Ballot[numberOfBallots];
-    int ballot = 0;
-    for (int b=0; b < ballotsToSet.length; b++) {
-      if (ballotsToSet[b] != null) {
-        this.ballots[ballot++] = ballotsToSet[b];
-      }
-    }
-  }
-  
-}
+Behavior: Getting all the scenarios
+  Ensuring that getting all the scenarios does not have side effects
+
+Behavior: Getting all the ballots
+  Ensuring that getting all the ballots does not have side effects
