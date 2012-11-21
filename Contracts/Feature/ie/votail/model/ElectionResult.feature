@@ -1,3 +1,28 @@
+Feature:  Set status
+    In order to ...
+    I set the status
+Behavior: Set status
+    Requiring 'status' has no value
+    And no member of 'listOfStates' has no value
+    And no memer of 'status' has no value
+    
+Feature: Set identifiers
+    In order to ...
+    I set the identifiers
+Behavior: Set identifiers
+    Requiring 'identifiers' has no value
+    And no member of 'listOfIDs' has a value
+    Ensuring no member of 'identifiers' has no value
+    
+//JML includes an extra contract mentioning "assignable"
+Feature: Set number of candidates
+    In order to ...
+    I set the number of candidates
+Behavior: Set candidate count
+    Requiring 'number' is greater than 1
+    And 'numberOfCandidates' and 'number' are the same
+    
+
 package ie.votail.model;
 
 import election.tally.Candidate;

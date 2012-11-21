@@ -1,3 +1,38 @@
+Invariant: Candidate ID
+    Ensuring 'candidateID' is greater than or equal to 0
+    
+Constraint: Canidate ID
+    old 'candidateID' different from 'NO_CANDIDATE' implies 'candidateID' is the same as old 'candidateID'
+
+Invariant: Number of votes added at each count
+    all members of 'votesAdded' are greater than 0
+    
+Invariant: Number of votes added at each count
+    Ensuring that initially all members of 'votesAdded' are 0
+    
+Invariant: Numer of votes added at each count
+    Ensuring the length of 'votesAdded' is less than or equal to 'CountConfiguration.MAXCOUNT'
+    
+Invariant: Votes added in relation to votes removed
+    Ensuring 'votesAdded' and 'votesRemoved' are different
+    
+Invariant: Last count
+    Ensuring 'lastCountNumber' is 0
+    
+Constraint: Last count
+    Ensuring old 'lastCountNumber' is less than or equal to 'lastCountNumber'
+    
+Constraint: Last count
+    Ensuring 'lastCountNumber' is less than 'CountConfiguration.MAXCOUNT'
+    
+Constraint: Last count
+    Ensuring 'lastCountNumber' is less than the length of 'votesAdded'
+
+Constraint: Last count
+    Ensuring 'lastCountNumber' is less than the length of 'votesRemoved'
+    
+ 
+
 package election.tally;
 
 import java.io.Serializable;
@@ -70,9 +105,28 @@ public class Candidate extends CandidateStatus implements Serializable {
   protected /*@ spec_public @*/ int lastCountNumber = 0;
 
   
+Constraint: Total vote
+    Ensuring initially 'totalVote' is 0
+
+Constraint: Total vote
+    Ensuring old 'totalVote' is less than or equal to 'totalVote'
+  
   //@ protected initially totalVote == 0;
   //@ protected constraint \old(totalVote) <= totalVote;
   protected /*@ spec_public @*/ int totalVote = 0;
+
+Constraint: Removed vote
+    Ensuring initially 'removedVote' is 0
+
+Invariant: Removed vote
+    Ensuring 'removedVote' is less than or equal to 'totalVote'
+    
+Constraint: Removed vote
+    Ensuring old 'removedVote' is less than or equal to 'removedVote'
+    
+Invariant: State
+    Ensuring 'state' equal to 'CONTINUING' implies that 'removedVote' is 0
+    
 
   
   /** Number of ballots transferred to another candidate*/
@@ -85,11 +139,23 @@ public class Candidate extends CandidateStatus implements Serializable {
     
   public static final int NO_CANDIDATE = Ballot.NONTRANSFERABLE;
   
+Invariant: Next Candidate ID
+    Ensuring old 'nextCandidateID' is less than or equal to 'nextCandidateID'
+  
   /**
    * Next available value for candidate ID number.
    */
   //@ private constraint \old(nextCandidateID) <= nextCandidateID;
   private /*@ spec_public @*/ static int nextCandidateID = MAX_CANDIDATES + 1;
+  
+Feature: Number of votes
+    In order to get the number of votes
+    I compute number that was added or removed in this round of counting
+Behavior: Added or removed
+    Requiring 'count' is greater than or equal to 0
+    And the length of 'votesAdded' is greater than 'count'
+    And the length of 'votesRemoved' is greater than 'count'
+    Ensuring the index 'count' of 'votesAdded' minus the index 'count' of 'votesRemoved' is 'result'
   
   /**
    * Gets number of votes added or removed in this round of counting.
