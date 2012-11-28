@@ -212,6 +212,12 @@ Behavior: Added or removed
     return candidateID;
   }
   
+Feature: Candidate
+    When I set up a Candidate the following holds
+Behavior: Set up candidate
+    Requiring 'theCandidateID' is greater than 0
+    Ensuring my 'candidateID' equals 'theCandidateID'
+  
   /**
    * Create a <code>candidate</code> where the identifier is already known
    * 
@@ -233,6 +239,20 @@ Behavior: Added or removed
       this.votesRemoved[i] = 0;
     }
   }
+  
+Feature: Add vote
+    In order to ..
+    I add a vote to a ballot card
+Behavior: Add vote to ballot card
+    Requiring 'state' equals 'CONTINUING'
+    And 'lastCountNumber' is smaller than or equal to 'count'
+    And 'count' is greater than 0
+    And the length of 'votesAdded' is greater than 'count'
+    And 'numberOfVotes' is greater than or equal to 0
+    Ensuring the old value of the index 'count' of 'votesAdded' plus 'numberOfVotes' equals 
+            the index 'count' of 'votesAdded'
+    And the old value of 'totalVote' plus 'numberOfVotes' equals the index 'count' of 'votesAdded'
+    And 'count' equals 'lastCountNumber'
   
   /**
    * Add a number of votes to the candidate's ballot pile.
@@ -261,6 +281,15 @@ Behavior: Added or removed
     updateCountNumber(count);
   }
   
+Feature: Update count number
+    Update the last count number for this candidate
+Behavior: Update
+    Requiring 'CountConfiguration.MAXCOUNT' is greater than 'count'
+    And the length of 'votesAdded' is greater than 'count'
+    And the length of 'votesRemoved' is greater than 'count'
+    And 'count' is greater than or equal to 'lastCountNumber'
+    And 'count' equals 'lastCountNumber'
+  
   /**
    * Update the last count number for this Candidate
    * 
@@ -278,6 +307,23 @@ Behavior: Added or removed
   protected void updateCountNumber(final int count) {
     lastCountNumber = count;
   }
+  
+Feature: Remove votes from ballot stack
+    In order to..
+    I remove a number of votes from a canidates ballot stack
+Behaviour: Remove votes
+    Requiring 'state' equals 'ELIMINATED' or 'state' equals 'ELECTED'
+    And 'count' is greater than or equal to 'lastCountNumber'
+    And 'count' is greater than or equal to 0
+    And the length of 'votesRemoved' is greater than 'count'
+    And the length of 'votesAdded' is greater than 'count'
+    And 'CountConfiguration.MAXCOUNT' is greater than 'count'
+    And 'numberOfVotes' is greater than or equal to 0
+    And the result of 'getTotalAtCount()' is greater than or equal to 'numberOfVotes'
+    Ensuring the old value of the index 'count' of 'votesRemoved' plus 'numberOfVotes' equals the index 'count' og 'votesRemoved'
+    And the old value of 'removedVote' plus 'numberOfVotes' equals 'removedVote'
+    And 'count' equals 'lastCountNumber'
+    
   
   /**
    * Removes a number of votes from a candidates ballot stack.
@@ -309,6 +355,18 @@ Behavior: Added or removed
     updateCountNumber(count);
   }
   
+Feature: Declare elected
+    In order to elect a candidate
+    I declare him elected
+Behaviour: Declare elected
+    Requiring my 'state' equals 'CONTINUING'
+    And 'countNumber' is greater than or equal to my 'lastCountNumber'
+    And 'countNumber' is greater than or equal to 0
+    And 'CountConfiguration.MAXCOUNT' is greater than 'countNumber'
+    And the length of 'votesAdded' is greater than 'countNumber'
+    And the length of 'votesRemoved' is greater than 'countNumber'
+    Ensuring 'state' equals 'ELECTED'
+  
   /** Declares the candidate to be elected */
   /*@ public normal_behavior
     @   requires this.state == CONTINUING;
@@ -324,6 +382,17 @@ Behavior: Added or removed
     state = ELECTED;
   }
   
+Feature: Declare eliminated
+    In order to eliminate a candidate
+    I declare him eliminated
+Behavior: Eliminate candidate
+    Requiring 'countNumber' is greater than or equal to 0
+    And 'CountConfiguration.MAXCOUNT' is greater than 'countNumber'
+    And the length of 'votesAdded' is greater than 'countNumber'
+    And the length of 'votesRemoved' is greater than 'countNumber'
+    And my 'state' equals 'CONTINUING'
+    Ensuring 'state' equals 'ELIMINATED'
+  
   /** Declares the candidate to be eliminated */
   /*@ public normal_behavior
     @   requires 0 <= countNumber && countNumber < CountConfiguration.MAXCOUNT;
@@ -338,6 +407,13 @@ Behavior: Added or removed
     updateCountNumber(countNumber);
     state = ELIMINATED;
   }
+  
+Feature: Determine ordering
+    Determines the relative ordering
+    of the candidate in the event of a tie
+Behaviour: Determine ordering of candidates
+    Ensuring the result equals true implies my 'candidateID' is greater than 'other.candidateID'
+    And my 'candidateID' is greather than 'other.candidateID' implies the result equals true
   
   /**
    * Determines the relative ordering of the candidate in the event of a tie.
@@ -381,6 +457,13 @@ Behavior: Added or removed
     @}
     @*/
   
+Feature: Test candidate
+    In order to check if a candidate has been elected
+    I check its state
+Behavior: Check candidate state
+    Ensuring the result is true implies 'state' equals 'ELECTED'
+    And 'state' equals 'ELECTED' implies the result equals true
+  
   /**
    * Has this candidate been elected?
    * 
@@ -410,6 +493,12 @@ Behavior: Added or removed
 
     return stringBuffer.toString();
   }
+  
+Feature: Test for elimination
+    In order to check if a candidate has been eliminated
+    I check the state of the candidate
+Behaviour: Test candidate state
+    Ensuring 'state' equals 'ELIMINATED'
   
   //@ ensures \result <==> (state == ELIMINATED);
   public/*@ pure*/boolean isEliminated() {
