@@ -1,0 +1,105 @@
+behavior 'Get a textual representation of a model election scenario'
+  class ElectoralScenario
+  signature 'public/*@ pure @*/String toString()'
+end
+
+rule tostring_pure that getting the textual representation has no side effects
+  expr 'pure'
+end
+
+behavior 'Add outcome'
+  class ElecetoralScenario
+  signature 'public void addOutcome(/*@ non_null*/final Outcome outcome)'
+end
+
+rule not_null that '$x' has a value
+  expr '$x != null'
+end
+
+rule number_of_candidates that the number of candidates is increased by $x
+  expr '$x + \old(getNumberOfCandidates()) == getNumberOfCandidates()'
+end
+
+rule contains '$list' contains '$element'
+  expr '$list.contains($element)'
+end
+
+behavior 'Convert scenario to predicate'
+  class ElectoralScenario
+  signature 'public/*@ pure*/String toPredicate()'
+end
+
+rule size_greater_than that the size of '$list' is greater than $val
+  expr '$list.size() > $val'
+end
+
+behavior 'Sort canonically'
+  class ElectoralScenario
+  signature 'public ElectoralScenario canonical()'
+end
+
+rule result_same_as_size the size of the result is the same as the size of '$list'
+  expr '$list.size() == \result.$list.size()'
+end
+
+behavior 'Check whether scenarios are the same'
+  class ElectoralScenario
+  signature 'public/*@ pure*/boolean equivalentTo(final ElectoralScenario other)'
+end
+
+rule equals the result is whether this scenario canonically sorted is the same as the '$other' scenario canonically sorted
+  expr '\result <==> canonical().equals($other.canonical())'
+end
+
+behavior 'Append scenario'
+  class ElectoralScenario
+  signature 'public/*@ pure*/ElectoralScenario append(final/*@ non_null*/Outcome outcome)'
+end
+
+rule the size of the result is the size of this scenarios size plus $x
+  expr '$x + size() == \result.size()'
+end
+
+  And the size of the result is the size of this scenario plus 1
+  And the result contains the 'outcome'
+  And that the the outcome of checking whether the result and the result of adding 'outcome' to this scenario is true
+
+Behavior: Copy a scenario
+  Ensuring that copying a scenario has no side effects
+  And the result is the same as this scenario
+
+Behavior: Check whether there is a tie between candidates in this scenario
+  Ensuring: Checking whether there is a tie in this scenario has no side effects
+
+Behavior: Check if this scenario has an outcome
+  Ensuring that checking if this scenario has an outcome has no side effect
+  And if the result is true, then there should be a tie
+
+Behavior: Get the number of winners
+  Ensuring that getting the number of winners has no side effects
+  And the result is greater than 0
+  And the result is smaller than the size of 'outcomes'
+
+Behavior: Get the number of scenarios
+  Requiring that the number of 'winners' is greater than 0
+  And the number of 'losers' are greater than 0
+  Ensuring that the result is greater than or equal to 4
+
+Behavior: Get the total number of scenarios
+  Requiring that the 'number of outcomes' is greater than 1
+  Ensuring that getting the total number of scenarios has no side effects
+  And that the result is the sum of the total number of scenarios for values smaller than 'number of outcomes'
+
+Behavior: Get the number of candidates
+  Ensuring that getting the number of candidates has no side effects
+  And that the result is the size of outcomes
+
+Behavior: Check whether a scenario matches the election result
+  Requiring that the ballot counting is finished
+
+Behavior: Check whether this scenario is a bye election
+  Ensuring that checking whether this scenario is a bye election has no side effects
+  And the result is the same as 'bye election'
+
+Behavior: Get the voting scheme
+  Ensuring that getting the voting scheme has no side effects
