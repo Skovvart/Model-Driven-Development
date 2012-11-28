@@ -1,0 +1,29 @@
+behavior 'Find scenario list'
+  class ScenarioFactory
+  signature 'public/*@ pure @*/ScenarioList find(final int numberOfOutcomes, final int numberOfSeats, final /*@ non_null @*/ Method method)'
+end
+
+rule greater_than_or_equal_to the '$x $y $z' is greater than or equal to $q
+  expr '$q <= $x_$y_$z'
+end
+
+rule not_null '$x' has a value
+  expr '$x != null'
+end
+
+rule number_of_outcomes1 that if the 'number of outcomes' is $x then the result list contains $y elements
+  expr '(numberOfOutcomes == $x) ==> (\result.getNumberOfScenarios() == $y)'
+end
+
+rule number_of_outcomes2 if the 'number of outcomes' is greater than $x then the result list contains less than or equal to $y times the outcome of the operation with 'number of outcomes' being $z smaller
+  expr '($x < numberOfOutcomes) ==> (\result.getNumberOfScenarios() <= $y * find (numberOfOutcomes-$z, numberOfSeats, method))'
+end
+
+behavior 'Find base scenario'
+  class ScenarioFactory
+  signature 'protected void findBaseScenarios(final /*@ non_null @*/ Method method, final /*@ non_null @*/ ScenarioList scenarios, final boolean byeElection'
+end
+
+rule number_of_scenarios the length of 'scenarios' is $x
+  expr 'scenarios.getNumberOfScenarios() == $x'
+end

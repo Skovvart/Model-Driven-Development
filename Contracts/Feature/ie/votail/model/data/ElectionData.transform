@@ -1,0 +1,13 @@
+behavior 'Getting the scenario'
+  class ElectionData
+  signature 'public /*@ pure @*/ ElectoralScenario getScenario()'
+end
+
+behavior 'Getting the ballots'
+  class ElectionData
+  signature 'public /*@ pure @*/ Ballot[] getBallots()'
+end
+
+rule not_null that getting the $x does not have side effects
+  expr 'true'
+end
