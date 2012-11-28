@@ -1,0 +1,50 @@
+behavior 'Scenario list'
+  class ScenarioList
+  signature 'public ScenarioList()'
+end
+
+rule number_of_partitions the number of partitions is '$x'
+  expr 'partitions.length == $x'
+end
+
+rule bucket_size the bucket size is '$x'
+  expr 'bucket.size() == 0'
+end
+
+rule list_size the size is '$x'
+  expr 'size() == 0'
+end
+
+behavior 'Has scenario'
+  class ScenarioList
+  signature 'public boolean hasScenario(final /*@ non_null @*/ ElectoralScenario scenario)'
+end
+
+rule not_null '$x' has a value
+  expr '$x != null'
+end
+
+behavior 'Include scenario'
+  class ScenarioList
+  signature 'public boolean add(final /*@ non_null*/ElectoralScenario scenario)'
+end
+
+rule member_of_scenario_list '$x' is member of the scenario list
+  expr 'hasScenario($x)'
+end
+
+
+behavior 'Get scenario count'
+  class ScenarioList
+  signature 'public/*@ pure*/int getNumberOfScenarios(final int numberOfWinners)'
+end
+
+    And 'result' is greater than or equal to '0'
+
+rule positive_number '$x' is a positive number
+  expr '$x > 0'
+end
+
+rule greater_than_or_equal result is greater than or equal to '$x'
+  expr '\result >= $x'
+end
