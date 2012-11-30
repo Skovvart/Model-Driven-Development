@@ -1,12 +1,20 @@
 \documentclass{llncs}
-%Main report
-\begin{document}
+% make a proper TOC despite llncs, http://code.google.com/p/decidr/wiki/LatexLLNCSTableOfContents
+\setcounter{tocdepth}{2}
+\makeatletter
+\renewcommand*\l@author[2]{}
+\renewcommand*\l@title[2]{}
+\makeatletter
+% end TOC fix
 
 \title{Programming by Contract-based Behavior Driven Development Framework}
 \author{Ahmad Salim Al-Sibahi \and Hildur Uffe Flemberg \and S\o ren S\o nderby Nielsen \and Nicolai Skovvart\thanks{Supervisors: Andrzej Wasowski and Rolf-Helge Pfeiffer}}
 \institute{IT University of Copenhagen}
 \date{\today}
+\bibliographystyle{splncs}
 
+
+\begin{document}
 \maketitle
 
 \include{Abstract}
@@ -31,7 +39,9 @@
 
 \include{Conclusion}
 
-\bibliographystyle{splncs}
+\include{Reflection}
+%Skal vi overhovedet have en reflektion? Kan ikke se Andrzej nævne den, eller præcis hvad der skal være i den.
+
 \bibliography{thesis}
 
 \end{document}

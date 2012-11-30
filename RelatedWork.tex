@@ -1,38 +1,25 @@
 \section{Related Work}
-How to read
-\begin{itemize}
-\item At this point you have read the title, abstract, intro, related work and conclusion.
-\item Read the entire paper without stopping
-\item Skip parts that you do not understand.
-\item Most papers can be processed like that within an hour.
-\item Read the paper second time. Normally you can understand a lot more.
-\item Sketch an outline, mindmap for the paper.
-\item Analyze claims and evidence critically.
-\item You are ready to write a 3-4 lines summary for your related work section
-\end{itemize}
+To describe contracts there are two methods that come to mind: Object Constraint Language(OCL) [Object Management Group (2006)], and Business Object Notation(BON) [Walden, Marc-Nerson (1994)].
+OCL only allows for formal specifications of contracts, but BON both allows and encourages the use of both informal and formal specifications.
+BON's informal specifications are similar to our project's behaviors, as they both allow description of behaviors in natural language.
+Our project proposes a way to express the behaviors in a more flexible and natural language only requiring a loose structure, where informal BON requires the use of technical terms such as classes, inheritance and composition.
 
-Citing
-\begin{itemize}
-\item 15-30 references, the last page (more in a thesis)
-\item About half is related work. Rest is background information.
-\item Prioritize trustworthy papers, respected venues and authors.
-\item Papers with language mistakes, unclear, badly organized are often also conceptually flawed (this is also why you should avoid these pitfalls in your writing).
-\item Wikipedia entries, industrial white papers, newspaper articles, and student term projects, are most often not suitable to cite as primary sources.
-\item Avoid quotes, avoid long quotes, avoid figure quotes.
-\item Always cite if you quote. Also for figures! Quoting without citing is failed exam and a risk of exmatriculation.
-\item All references should have uniform look (BiBTeX if possible)
-\end{itemize}
 
-Writing the section
-\begin{itemize}
-\item Transform your notes into a 3-4 lines summary
-\item Not enough just to list.
-  \begin{itemize}
-  \item Bad Another related work is XXX
-  \item Good XXX addresses the same problem in a different way. The advantage of our solution is that it is faster for cases when .... Also XXX provides no evidence whether the solution really scales if ...On the other hand XXX exploits YYY, which would be interesting to consider as an extension of our work.
-  \end{itemize}
-\item Explain precisely what are the advantages, or the nature of relation between your work and the other work.
-\item Section can take anything from 3 pages to3/4 of a page
-\item Can delegate writing the section and reading related work.
-\item All can be examined in the contents of this section.
-\end{itemize}
+
+Hubert Bauermeister[Bauermeister (2004)] wrote an interesting paper about refactoring test-cases written in a test driven development workflow to formal contracts.
+This is similar to our project in how it attempts to leverage the ease of writing test-like behaviors and translating them to allow for use in critical systems.
+It also presents a simple DSL which allows for simple transformations between normal tests and contracts.
+While many of the refactoring techniques could be used in our case for generalising step-based behaviors, the current implementation of the Bauermeister’s DSL lack many of the advantages of behavior driven development, and unlike our project it does not seem to offer easily readable documents that can be used in other domains than computer science.
+
+
+
+An alternative approach to specifying contracts textually is specifying them visually, as suggested in “Model-driven Monitoring: Generating Assertions from Visual Contracts“ [Lohmann et al. (2006)]. While visual approaches can be easier to understand they are often cumbersome to use, and in the case of software the behaviour is already specified.
+Our project allows for an easier transition between loosely defined specification to structured contracts and does not require extensive tooling.
+
+
+
+We could have used a better integration of natural language in our transformation language so rules were more reusable and flexible. 
+The input rules could be made more flexible using natural language processing to interpret the behaviors, in a similar manner to Schulze et al. [Schulze et al. (2012)] who attempt to keep Literate Modeling models and UML diagrams synchronized by using natural language processing and OCL model querying.
+It could be possible to infer the method specification from the behavior definitions in natural language such as what is proposed by Pandita et al. [Pandita et al. (2012)].
+A potential problem with increased flexibility in this manner is less reliability which could prevent it from being used in critical systems where reliability is paramount.
+When matching sentences using a subset of regular language this problem should be minimized if not completely eliminated.
