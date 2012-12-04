@@ -1,1 +1,226 @@
 \section{Technical Solution}
+\subsection{Tomato - Contracting using Simplified JML}
+\label{sub:Tomato - Contracting using Simplified JML}
+
+To represent contracted software we have chosen to create a subset of the
+Java Modelling Language called Tomato,
+which focuses primarily on interface-specific parts.
+
+\subsubsection{Representing Logical Expressions}
+\label{sub:Representing Logical Expressions}
+The base for many contracting features are logical expressions, that express
+the success of a condition.
+To allow the formulation of most expressions possible we support all pure
+logical Java expressions.
+Furthermore Tomato, similarly to JML \cite{leavens2006design}.
+supports extensions that allow formulation of more complicated
+expressions such as implications and quantifiers,
+and those that specify change such as \textbackslash result
+and \textbackslash old($\cdot$).
+
+\begin{lstlisting}[language=Java,caption={Contracted Method for Adding Natural Numbers},label={lst:jmlexample}]
+  class Calculator {
+    //@ requires input_1 > 0
+    //@ requires input_2 > 0
+    //@ ensures \result == input_1 + input_2
+    //@ ensures \result > 0
+    public /*@ pure @*/ int add(int input_1, int input_2) { ... }
+  }
+\end{lstlisting}
+
+\subsubsection{Preconditions and Postconditions}
+\label{sub:Preconditions and Postconditions}
+
+As the idea with code contracting is the specification of the behavior of
+an object; Tomato allows specification of pre- and postconditions of methods.
+Preconditions specify which prerequisites the caller of a method must
+satisfy in order for the method to succeed.
+To specify a precondition in Tomato one must use the ‘requires’
+keyword (see Listing~\ref{lst:jmlexample}).
+In converse postconditions, specified by the keyword ‘ensures’,
+specify which guarantees the callee of a method can give after an invocation.
+This allows the caller to predict what the method does,
+and ensures further use for subsequent preconditions.
+
+\subsection{Gherkin - Describing Features for Behavioral Driven Development}
+\label{sec:Gherkin - Describing Features for Behavioral Driven Development}
+
+The specification of informal behaviors in our framework is done using an
+extended version of the Gherkin description language.
+The extensions made allow lifting the description of behaviors to a
+general level, such that they can later be translated to contracts.
+
+\subsubsection{Basic Description}
+\label{sub:Basic Description}
+
+The main component of BDD is called a feature.
+A feature is a part of a software system,
+which can specified by a range of specific behaviors called scenarios.
+Such scenarios can be either specific consisting solely of a range of
+assumptions and assertions, or be outlined in a way that allows
+specification of a range of different example inputs.
+Moreover feature descriptions allow specification of a background clause,
+as a way to set the general context for the specific scenarios.
+If the reader is further interested in basic feature definitions,
+please refer to “The Cucumber Book” \cite{hellesoy2012}.
+
+\subsubsection{Generalizing Behaviors}
+\label{sub:Generalizing Behaviors}
+
+Our primary extensions to the Gherkin are the addition of general
+behavior clauses. A general behavior corresponds to a subroutine
+and consists of a series of requirement blocks and insurance blocks
+(see Listing~\ref{lst:featureexample}).
+
+\begin{lstlisting}[caption={General Behavior Description of Adding Natural Numbers},label={lst:featureexample}]
+  Feature: ...
+  Behavior: Add two numbers
+     Requiring <input_1> is a positive number
+     And <input_2> is a positive number
+     Ensuring the result is the sum of <input_1> and <input_2>
+     And result is a positive number
+\end{lstlisting}
+
+These requirements and insurances are written completely in high-level
+natural language, and specifies informally which contracts the corresponding
+behavior has.
+
+\subsection{Lettuce - Transforming Behaviors to Contracts}
+\label{sub:Lettuce - Transforming Behaviors to Contracts}
+
+In order to translate high-level informal behaviors to low-level formal
+contracts we use a small DSL called Lettuce.
+Lettuce allows direct translation of behaviors to methods,
+and rule-wise pattern based translation for translating contract expressions.
+
+\subsubsection{Mapping Behaviors}
+\label{sub:Mapping Behaviors}
+
+Behaviors from Gherkin are mapped to a method using a similarly named
+construct in Lettuce. The construct needs a specification on which
+description it matches from the feature definitions (see Listing~\ref{lst:featureexample}),
+which structure it belongs to and how the actual method signature is
+(see Listing~\ref{lst:behtransexample}).
+
+\begin{lstlisting}[caption={General Behavior Description of Adding Natural Numbers},label={lst:behtransexample}]
+  behavior 'Add two numbers'
+    class Calculator
+    signature 'public int add(int input1, int input2)'
+  end
+\end{lstlisting}
+
+The actual translation process is rather simple,
+each given behavior from the feature definition is mapped to the
+specified class with the specified signature. Then each of its requirements
+and insurances are mapped using the defined rules and attached to the mapped
+method (see Section~\ref{sub:Rewriting Natural Sentences to Logical Expressions}).
+
+\subsubsection{Rewriting Natural Sentences to Logical Expressions}
+\label{sub:Rewriting Natural Sentences to Logical Expressions}
+
+In many ways, except for the semantic of usage,
+preconditions and postconditions are similar in the way they are constructed.
+As such we have made it possible for our transformation language to translate
+to logical expression directly with the semantic of usage being determined by
+the behavior descriptions. In this way one can reuse many of the
+transformation rules, and the translation would be simpler
+and more uniformly looking.
+
+\begin{lstlisting}[caption={Different Types of Transformation Rules},label={lst:ruleexample}]
+  rule positive $input is a positive number
+    match greater_than $x=$input $y='0'
+  end
+
+  rule greater_than $x is greater than $y
+    expr '$x > $y'
+  end
+
+  rule if_ 'if' $condition 'then' $texpr [(otherwise | 'else') $fexpr]
+    if def? $fexpr then
+      expr '$condition ==> $texpr && !$condition ==> $fexpr'
+    else
+      expr '$condition ==> $texpr'
+    end
+  end
+
+  rule sum the $sum is the sum of $input1 and $input2
+    expr '$sum == $input1 + $input2'
+  end
+\end{lstlisting}
+
+A transformation rule has two main components: the pattern which a given
+string should match and a body expression which defines how the
+transformation should be done (see Listing~\ref{lst:ruleexample}).
+To allow rules to reference each other, each rules must additionally be
+given a unique identifier.
+
+\paragraph{Patterns}
+\label{par:Patterns}
+
+To find the fitting transformation for a given string description
+(written in either a requirement block or an insurance block), we allow the
+definition of patterns which describes the appearance of the string.
+A pattern is composed of a series of exact strings, or variables,
+denoted by the sigil `\$', which represents a given word.
+Furthermore to allow greater reusability we also allow alternation between
+series of subpatterns (see Listing~\ref{lst:ruleexample}) surrounded by parentheses and
+separated with a `$\vert$' symbol, and we allow optional parts which are
+surrounded with brackets.  This is similar to how regular regular
+expressions work except kleene-star `*' construction is not supported
+resulting in that a subpattern can be matched at most once.
+
+\paragraph{Transformation Expressions}
+\label{par:Transformation Expressions}
+While patterns specify which patterns are matched, transformation expressions
+specify how to translate a given pattern to a formal logical expression.
+In our language we support four kinds of transformation expressions:
+generation, forwarding, conditional and failure (see Listing~\ref{lst:ruleexample}. for the first three).
+Generation is written with the keyword `expr'
+followed by the string which should be generated on output, where variables
+in that string are replaced by the words captured in the pattern.
+Forwarding permits rules to allow other rules to further specify
+transformations, and as such allows greater reusability.
+A forward expressions is written with the keyword `match',
+followed by the name of the rule that should handle further transformations,
+and in the end a series of assignments to the variables of the forwarded
+rules patterns.
+To handle variables which occur in alternation and optional parts of a
+pattern, the transformation permits the usage of if def?-then-else expression.
+These expressions allows checking if a series of variables exist,
+and handle transformation flow accordingly.
+In the end failures, which are denoted by the keyword `fail',
+are useful as placeholders until an actual transformation is written.
+
+\subsubsection{Evaluation of Transformation Rules}
+\label{sub:Evaluation of Transformation Rules}
+
+The process of evaluating a feature description using the transformation rules require two steps:
+\begin{enumerate}
+  \item Locating a fitting pattern for the given string
+  \item Executing the body of the rule with the captured variables
+\end{enumerate}
+To accommodate the first part of the process we translate each pattern to a
+similar named regular expression.
+Then we try to match the string with each pattern until we succeed,
+and then each variable in the pattern is captured into an environment
+which maps variable names to values.
+After a match is found, the second process is started where the body
+for the matched pattern is evaluated given the captured environment.
+The evaluation is dependent in which type of expression is specified
+and is done as follows:
+
+\begin{description}
+  \item[Generation] The generation statements are evaluated simply
+    by replacing all variables in the desired result expression with their 
+    value in the environment. 
+  \item[Forwarding] Transformations that use forwarding are evaluated by
+    assigning each of the variables in the pattern with the values in the
+    current environment and then further evaluating the forwarded rule.
+  \item[Conditional] To evaluate a conditional expression, we check if all
+    the variables specified exist in the current environment.
+    If they exist the `then' inner transformation is evaluated recursively
+    with the given variables, otherwise the `else' inner transformation
+    is evaluated similarly.
+  \item[Failure] We simply throw an exception with the given message
+    if a failure statement is met.
+\end{description}
