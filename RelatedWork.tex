@@ -1,25 +1,25 @@
 \section{Related Work}
-To describe contracts there are two methods that come to mind: Object Constraint Language(OCL) [Object Management Group (2006)], and Business Object Notation(BON) [Walden, Marc-Nerson (1994)].
+To describe contracts there are two methods that come to mind: Object Constraint Language(OCL) [Object Management Group (2006)], and Business Object Notation(BON) \cite{walden1995}.
 OCL only allows for formal specifications of contracts, but BON both allows and encourages the use of both informal and formal specifications.
 BON's informal specifications are similar to our project's behaviors, as they both allow description of behaviors in natural language.
 Our project proposes a way to express the behaviors in a more flexible and natural language only requiring a loose structure, where informal BON requires the use of technical terms such as classes, inheritance and composition.
 
 
 
-Hubert Bauermeister[Bauermeister (2004)] wrote an interesting paper about refactoring test-cases written in a test driven development workflow to formal contracts.
+Hubert Baumeister wrote an interesting paper \cite{baumeister2004} about refactoring test-cases written in a test driven development workflow to formal contracts.
 This is similar to our project in how it attempts to leverage the ease of writing test-like behaviors and translating them to allow for use in critical systems.
 It also presents a simple DSL which allows for simple transformations between normal tests and contracts.
-While many of the refactoring techniques could be used in our case for generalising step-based behaviors, the current implementation of the Bauermeister’s DSL lack many of the advantages of behavior driven development, and unlike our project it does not seem to offer easily readable documents that can be used in other domains than computer science.
+While many of the refactoring techniques could be used in our case for generalising step-based behaviors, the current implementation of the Baumeister’s DSL lack many of the advantages of behavior driven development, and unlike our project it does not seem to offer easily readable documents that can be used in other domains than computer science.
 
 
 
-An alternative approach to specifying contracts textually is specifying them visually, as suggested in “Model-driven Monitoring: Generating Assertions from Visual Contracts“ [Lohmann et al. (2006)]. While visual approaches can be easier to understand they are often cumbersome to use, and in the case of software the behaviour is already specified.
+An alternative approach to specifying contracts textually is specifying them visually, as suggested in ``Model-driven Monitoring: Generating Assertions from Visual Contracts'' \cite{lohmann2006}. While visual approaches can be easier to understand they are often cumbersome to use, and in the case of software the behaviour is already specified.
 Our project allows for an easier transition between loosely defined specification to structured contracts and does not require extensive tooling.
 
 
 
 We could have used a better integration of natural language in our transformation language so rules were more reusable and flexible. 
-The input rules could be made more flexible using natural language processing to interpret the behaviors, in a similar manner to Schulze et al. [Schulze et al. (2012)] who attempt to keep Literate Modeling models and UML diagrams synchronized by using natural language processing and OCL model querying.
-It could be possible to infer the method specification from the behavior definitions in natural language such as what is proposed by Pandita et al. [Pandita et al. (2012)].
+The input rules could be made more flexible using natural language processing to interpret the behaviors, in a similar manner to Schulze et al. \cite{schulze2012} who attempt to keep Literate Modeling models and UML diagrams synchronized by using natural language processing and OCL model querying.
+It could be possible to infer the method specification from the behavior definitions in natural language such as what is proposed by Pandita et al. \cite{pandita2012}.
 A potential problem with increased flexibility in this manner is less reliability which could prevent it from being used in critical systems where reliability is paramount.
 When matching sentences using a subset of regular language this problem should be minimized if not completely eliminated.
