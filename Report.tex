@@ -1,53 +1,51 @@
 \documentclass{llncs}
-\usepackage{listings}	% Nice code-boxes
+\usepackage{listings} % Nice code-boxes
 \usepackage{nameref}
-\usepackage{graphicx}	% For \includgraphics
-\usepackage{float}		% For in-line images
+\usepackage{graphicx} % For \includgraphics
+\usepackage{float}    % For in-line images
+\bibliographystyle{splncs}
 % make a proper TOC despite llncs, %http://code.google.com/p/decidr/wiki/LatexLLNCSTableOfContents
-%\setcounter{tocdepth}{2}
-%\setcounter{secnumdepth}{3}
-%\makeatletter
-%\renewcommand*\l@author[2]{}
-%\renewcommand*\l@title[2]{}
-%\makeatletter
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+\makeatletter
+\renewcommand*\l@author[2]{}
+\renewcommand*\l@title[2]{}
+\makeatletter
 % end TOC fix
-
-\begin{document}
 
 \title{Programming by Contract-based Behavior Driven Development Framework}
 \author{Ahmad Salim Al-Sibahi \and Hildur Uffe Flemberg \and S\o ren S\o nderby Nielsen \and Nicolai Skovvart\thanks{Supervisors: Andrzej Wasowski and Rolf-Helge Pfeiffer}}
-\institute{IT University of Copenhagen, Denmark\\
-	\email{\{asal, hufl, ssni, nsko\}@itu.dk}
-}
+\institute{IT University of Copenhagen, Denmark}
 \date{\today}
+
+\begin{document}
 
 \maketitle
 
-\input{Abstract}
-%\tableofcontents
+\include{Abstract}
 
-\input{Introduction}
+\tableofcontents
 
-\input{Background}
+\include{Introduction}
 
-\input{Overview}
+\include{Background}
 
-\input{TechnicalSolution}
+\include{Overview}
 
-\input{Analysis}
+\include{TechnicalSolution}
 
-\input{Evaluation}
+\include{Analysis}
 
-\input{Threats}
+\include{Evaluation}
 
-\input{RelatedWork}
+\include{Threats}
 
-\input{Conclusion}
+\include{RelatedWork}
 
-\input{Reflection}
-%Skal vi overhovedet have en reflektion? Kan ikke se Andrzej nævne den, eller præcis hvad der skal være i den.
+\include{Discussion}
 
-\bibliographystyle{splncs}
+\include{Conclusion}
+
 \bibliography{Report}
 
 \appendix

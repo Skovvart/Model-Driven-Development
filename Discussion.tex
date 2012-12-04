@@ -1,0 +1,46 @@
+\section{Discussion}
+We find our project to be very interesting and we are sure it can be used.
+Both behavior driven development and programming by contract are very useful approaches to software development, and merging them would allow for even higher quality software as well as documentation.
+
+There are however several improvements that could be made to the product.
+What is essential in our product is the ability to transform human readable text into contracts, and this is somewhat cumbersome.
+This is due to the limited expressions our language can match.
+This problem could be solved in multiple ways: 
+
+One option is allowing for better regular expressions matching as well as transformations on the matched expressions.
+This could allow for more generalizable and reusable transformation rules.
+Being able to transform the matched expressions could also potentially be used for generation of parameter and method names.
+A matched string could be transformed according to a name scheme such as camel-case, underscore separation or whatever is desired by the users.
+
+Another option is more tightly defining the language and relying less on user-provided transformations.
+This does carry the risk of losing flexibility and is not a solution we believe is worth pursuing.
+
+A more drastic and interesting alternative could be to use natural language processing to analyse the sentences and extract meaning automatically.
+This could both be used for inferring method signatures as well as code contracts.
+It would make it harder, if not impossible, to make any predictions about the quality of the generated contracts which is not desirable in many cases.
+It would most likely also require a method of overriding wrongfully interpreted contracts.
+
+Another problem is the lack of support for certain contracting features.
+Our project does not, for example, support the concept of purity or other contracting features such as invariants or field constraints.
+It also lacks some syntactic sugar for allowing common contract features such as non-null constraints to be expressed effectively.
+
+Conceptionally there are also some problems with merging software constraints and natural language.
+While some concepts such as lists, stacks and integers can be expected to be known by people without computer science backgrounds, other concepts such as tuples might not, and expressing them can be hard.
+Complex nested quantifier-contracts can also be troublesome to express in natural language, though they are not impossible.
+
+Future work should solve the smaller issues such as lack of contracting features and make it less cumbersome to use.
+It could also be very interesting to see the results of natural language processing with regards to contracts.
+Some problems such as the merging of software constraints and natural language is harder and may not have a good solution, but it can probably be improved upon.
+
+
+%\subsection{Positives}
+%Working BDD DSL
+%Working BDD-Contracts DSL (sort of)
+
+
+%\subsection{Problems}
+%Lack of flexibility with regular expression
+%Lack of programming by contract concepts such as pure etc
+%Problems with expressing some contracts in "natural" english
+%Eclipse(?)
+%Time(?)
