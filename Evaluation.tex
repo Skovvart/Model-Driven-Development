@@ -1,16 +1,14 @@
 \section{Evaluation}
 \subsection{Method}
-\label{sub:Method}
 
-We evaluate and test the implementation of our framework for behaviour-driven design by means of a case study of another project created with accompanying contracts which we can “abstract” and rewrite to behaviours in natural English. On the basis of these behaviours we can use our framework to generate “low level” code contracts and then compare the results to the original contracts included in the project.
+We evaluate and test the implementation of our framework for behavior driven development by means of a case study of another project created with accompanying contracts which we can ``abstract'' and rewrite to behaviors in natural English. On the basis of these behaviors we can use our framework to generate ``low level'' code contracts and then compare the results to the original contracts included in the project.
  
-We have chosen to use the Vótáil project created by Dermot Cochran who is a PhD candidate from ITU. Vótáil is an open-source implementation that models the electoral system in Ireland specified in Business Object Notation (BON) and later refined into Java Modelling Language (JML).
+We have chosen to use the V\'{o}t\'{a}il project created by Dermot Cochran who is a Ph.D. candidate from ITU. V\'{o}t\'{a}il is an open-source implementation that models the electoral system in Ireland specified in Business Object Notation (BON) and later refined into Java Modelling Language (JML).
  
 We believe this is a fitting project to use as it is limited in size (i.e. not a monstrous nuclear power plant from the industry), it is created and inspired by people who work with contracts and verification at a high academic level (so we can expect the source contracts to be relevant) and finally, the total set of contracts is fairly diverse in terms of complexity (simple/advanced) and type (invariants, preconditions, postconditions etc).
  
-The success of our evaluation depends on the level of reproducibility that we achieve – i.e. how well can our generated contracts capture the same semantics as their original counterparts included in the project while at se same time being generated from high-level behaviours whose semantics are understood by a non-programmer (typically a business person).
+The success of our evaluation depends on the level of reproducibility that we achieve – i.e. how well can our generated contracts capture the same semantics as their original counterparts included in the project while at se same time being generated from high-level behaviors whose semantics are understood by a non-programmer (typically a business person).
  
-While we won’t perform any objective tests to estimate how suited a behaviour described in natural English is in a business context (we will probably give our opinion), we will evaluate the generated result. We do this both qualitatively (is it precise? does it cover the original contract? are they identical?) and quantitatively (how precise? to what degree is it covered?)
+While we will not perform any objective tests to estimate how suited a behaviour described in natural English is in a business context (we will probably give our opinion), we will evaluate the generated result. We do this both qualitatively (is it precise? does it cover the original contract? are they identical?) and quantitatively (how precise? to what degree is it covered?)
  
 With respect to the quantitative measures, we will state our evaluations in unit of percentage (how many of the generated contracts are adequately resembling their original counterpart to be considered successful) and set a threshold for overall success, say 80\%.
-
