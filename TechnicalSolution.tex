@@ -32,13 +32,13 @@ and \textbackslash old($\cdot$).
 \label{sub:Preconditions and Postconditions}
 
 As the idea with code contracting is the specification of the behavior of
-an object; Tomato allows specification of pre- and postconditions of methods.
+an object, Tomato allows specification of pre- and postconditions of methods.
 Preconditions specify which prerequisites the caller of a method must
-satisfy in order for the method to succeed.
+satisfy in order for the method to succeed and fulfil it's postcondition.
 To specify a precondition in Tomato one must use the ‘requires’
 keyword (see Listing~\ref{lst:jmlexample}).
-In converse postconditions, specified by the keyword ‘ensures’,
-specify which guarantees the callee of a method can give after an invocation.
+Conversely, postconditions, specified by the keyword ‘ensures’,
+specify which guarantees the callee of a method will give after an invocation.
 This allows the caller to predict what the method does,
 and ensures further use for subsequent preconditions.
 
