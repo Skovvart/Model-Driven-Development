@@ -4,6 +4,7 @@
 \usepackage{graphicx} % For \includgraphics
 \usepackage{float}    % For in-line images
 \bibliographystyle{splncs}
+
 % make a proper TOC despite llncs, %http://code.google.com/p/decidr/wiki/LatexLLNCSTableOfContents
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
@@ -22,25 +23,25 @@
 
 \maketitle
 
-\include{Abstract}
+\input{Abstract}
 
-\tableofcontents
+%\tableofcontents
 
-\include{Introduction}
+\input{Introduction}
 
-\include{Overview}
+\input{Overview}
 
-\include{TechnicalSolution}
+\input{TechnicalSolution}
 
-\include{Evaluation}
+\input{Evaluation}
 
-\include{Threats}
+\input{Threats}
 
-\include{RelatedWork}
+\input{RelatedWork}
 
-\include{Discussion}
+\input{Discussion}
 
-\include{Conclusion}
+\input{Conclusion}
 
 \bibliography{Report}
 
