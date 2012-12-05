@@ -1,17 +1,18 @@
 \documentclass{llncs}
 \usepackage{listings} % Nice code-boxes
 \usepackage{nameref}
-\usepackage{graphicx} % For \includgraphics
+\usepackage{graphicx} % For \includegraphics
 \usepackage{float}    % For in-line images
 \bibliographystyle{splncs}
+\lstset{basicstyle=\scriptsize\ttfamily,captionpos=b}
 
 % make a proper TOC despite llncs, %http://code.google.com/p/decidr/wiki/LatexLLNCSTableOfContents
-\setcounter{tocdepth}{2}
-\setcounter{secnumdepth}{3}
-\makeatletter
-\renewcommand*\l@author[2]{}
-\renewcommand*\l@title[2]{}
-\makeatletter
+%\setcounter{tocdepth}{2}
+%\setcounter{secnumdepth}{3}
+%\makeatletter
+%\renewcommand*\l@author[2]{}
+%\renewcommand*\l@title[2]{}
+%\makeatletter
 % end TOC fix
 
 \title{Programming by Contract-based Behavior Driven Development Framework}
