@@ -6,7 +6,7 @@ This allows managers to ensure that the specification are written down correctly
 
 While testing ensures that software works in most cases, sometimes most cases is not good enough. This might be in the case of developing a driver for a 
 space shuttle, where an error in the driver might cause a crash and end-up costing billions of dollars.
-Programming by contract \cite{CONTRACTS KILDE (Bertrand Meyer?)} solves this problem by introducing formal methods into software development, 
+Programming by contract \cite{meyer1992} solves this problem by introducing formal methods into software development, 
 and allow developers to formally specify the behaviour of loops, routines and objects.
 
 The goal is to introduce programming by contract to the concept of BDD. This includes designing and implementing a BDD-based framework,
@@ -14,11 +14,10 @@ which we have named Salad, that allows specifying contracts in human readable la
 The framework is based on the Cucumber BDD-framework \cite{hellesoy2012}.
 This includes extending the already existing feature description language in Cucumber with new constructs, 
 and creating a domain specific language (DSL) that specifies the mapping between natural language and formal contracts.
-The framework yields Java-files containing classes with methods that have contracts in the style specified by the Java Modeling Language (JML) \cite{JML KILDE}.
+The framework yields Java-files containing classes with methods that have contracts in the style specified by the Java Modeling Language (JML) \cite{leavens2006design}.
 Our aim is to create a rule mapping language which is expressive enough to handle a study case, when evaluating the solution.
 By comparing the level of expressiveness to existing contract implementations, 
 we reflect on the feasibility of designing such a language as well as examine the possibility of using these extensions in the real world.
-
 
 This paper is organized as follows.
 In Overview we give a general overview of BDD and our Salad framework.
