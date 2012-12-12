@@ -1,61 +1,17 @@
-\section{Technical Solution}
-\subsection{Tomato - Contracting using Simplified JML}
-\label{sub:Tomato - Contracting using Simplified JML}
-
-To represent contracted software we have chosen to create a subset of the
-Java Modelling Language called Tomato,
-which focuses primarily on interface-specific parts.
-
-\subsubsection{Representing Logical Expressions}
-\label{sub:Representing Logical Expressions}
-The base for many contracting features are logical expressions, that express
-the success of a condition.
-To allow the formulation of most expressions possible we support all pure
-logical Java expressions.
-Furthermore Tomato, similarly to JML \cite{leavens2006design}.
-supports extensions that allow formulation of more complicated
-expressions such as implications and quantifiers,
-and those that specify change such as \textbackslash result
-and \textbackslash old($\cdot$).
-
-\begin{lstlisting}[language=Java,caption={Contracted Method for Adding Natural Numbers},label={lst:jmlexample}]
-  class Calculator {
-    //@ requires input_1 > 0
-    //@ requires input_2 > 0
-    //@ ensures \result == input_1 + input_2
-    //@ ensures \result > 0
-    public /*@ pure @*/ int add(int input_1, int input_2) { ... }
-  }
-\end{lstlisting}
-
-\subsubsection{Preconditions and Postconditions}
-\label{sub:Preconditions and Postconditions}
-
-As the idea with code contracting is the specification of the behavior of
-an object, Tomato allows specification of pre- and postconditions of methods.
-Preconditions specify which prerequisites the caller of a method must
-satisfy in order for the method to succeed and fulfil it's postcondition.
-To specify a precondition in Tomato one must use the ‘requires’
-keyword (see Listing~\ref{lst:jmlexample}).
-Conversely, postconditions, specified by the keyword ‘ensures’,
-specify which guarantees the callee of a method will give after an invocation.
-This allows the caller to predict what the method does,
-and ensures further use for subsequent preconditions.
 
 \subsection{Gherkin - Describing Features for Behavioral Driven Development}
 \label{sec:Gherkin - Describing Features for Behavioral Driven Development}
 
 The specification of informal behaviors in our framework is done using an
 extended version of the Gherkin description language.
-The extensions made allow lifting the description of behaviors to a
-general level, such that they can later be translated to contracts.
+The extensions made allows the gradual conversion between classical step-oriented behaviors to generalized behaviors, such that they can later be translated to contracts.
 
 \subsubsection{Basic Description}
 \label{sub:Basic Description}
 
 The main component of BDD is called a feature.
 A feature is a part of a software system,
-which can specified by a range of specific behaviors called scenarios.
+which can be specified by a range of specific behaviors called scenarios.
 Such scenarios can be either specific consisting solely of a range of
 assumptions and assertions, or be outlined in a way that allows
 specification of a range of different example inputs.
@@ -67,7 +23,7 @@ please refer to “The Cucumber Book” \cite{hellesoy2012}.
 \subsubsection{Generalizing Behaviors}
 \label{sub:Generalizing Behaviors}
 
-Our primary extensions to the Gherkin are the addition of general
+Our primary extensions to Gherkin are the addition of general
 behavior clauses. A general behavior corresponds to a subroutine
 and consists of a series of requirement blocks and insurance blocks
 (see Listing~\ref{lst:featureexample}).
@@ -81,7 +37,7 @@ and consists of a series of requirement blocks and insurance blocks
      And result is a positive number
 \end{lstlisting}
 
-These requirements and insurances are written completely in high-level
+These requirements and insurances are written completely in
 natural language, and specifies informally which contracts the corresponding
 behavior has.
 
@@ -113,20 +69,20 @@ The actual translation process is rather simple,
 each given behavior from the feature definition is mapped to the
 specified class with the specified signature. Then each of its requirements
 and insurances are mapped using the defined rules and attached to the mapped
-method (see Section~\ref{sub:Rewriting Natural Sentences to Logical Expressions}).
+method (see Section~\ref{sub:RewritingSentencestoLogicalExpressions}).
 
-\subsubsection{Rewriting Natural Sentences to Logical Expressions}
-\label{sub:Rewriting Natural Sentences to Logical Expressions}
+\subsubsection{Rewriting Sentences to Logical Expressions}
+\label{sub:RewritingSentencestoLogicalExpressions}
 
 In many ways, except for the semantic of usage,
 preconditions and postconditions are similar in the way they are constructed.
 As such we have made it possible for our transformation language to translate
 to logical expression directly with the semantic of usage being determined by
-the behavior descriptions. In this way one can reuse many of the
-transformation rules, and the translation would be simpler
-and more uniformly looking.
+the behavior descriptions. 
+This allows the reuse of many of the transformations rules the user has written.
 
-\begin{lstlisting}[caption={Different Types of Transformation Rules},label={lst:ruleexample}]
+
+\begin{lstlisting}[caption={Different Types of Transformation Rules in Lettuce},label={lst:ruleexample}]
   rule positive $input is a positive number
     match greater_than $x=$input $y='0'
   end
@@ -164,9 +120,9 @@ A pattern is composed of a series of exact strings, or variables,
 denoted by the sigil `\$', which represents a given word.
 Furthermore to allow greater reusability we also allow alternation between
 series of subpatterns (see Listing~\ref{lst:ruleexample}) surrounded by parentheses and
-separated with a `$\vert$' symbol, and we allow optional parts which are
+separated with a vertical bar `$\vert$' symbol, and we allow optional parts which are
 surrounded with brackets.  This is similar to how regular regular
-expressions work except kleene-star `*' construction is not supported
+expressions work except Kleene-star `*' construction is not supported
 resulting in that a subpattern can be matched at most once.
 
 \paragraph{Transformation Expressions}
@@ -178,8 +134,8 @@ generation, forwarding, conditional and failure (see Listing~\ref{lst:ruleexampl
 Generation is written with the keyword `expr'
 followed by the string which should be generated on output, where variables
 in that string are replaced by the words captured in the pattern.
-Forwarding permits rules to allow other rules to further specify
-transformations, and as such allows greater reusability.
+Forwarding permits a rule to refer to previously written rules that should further handle the
+transformations and thus enhances reusability.
 A forward expressions is written with the keyword `match',
 followed by the name of the rule that should handle further transformations,
 and in the end a series of assignments to the variables of the forwarded
@@ -196,16 +152,18 @@ are useful as placeholders until an actual transformation is written.
 
 The process of evaluating a feature description using the transformation rules require two steps:
 \begin{enumerate}
-  \item Locating a fitting pattern for the given string
+  \item Pattern-match the given string to find the rule to evaluate
   \item Executing the body of the rule with the captured variables
 \end{enumerate}
 To accommodate the first part of the process we translate each pattern to a
-similar named regular expression.
+similar named regular expression. As an example take the pattern string of rule positive from Listing~\ref{lst:ruleexample}, it will be translated 
+from \textit{\$input is a positive number} to \textit{\textbackslash s*+(?\textless input\textgreater\textbackslash S+)\textbackslash s* is a postive number}.
+
 Then we try to match the string with each pattern until we succeed,
 and then each variable in the pattern is captured into an environment
 which maps variable names to values.
 After a match is found, the second process is started where the body
-for the matched pattern is evaluated given the captured environment.
+for the matched pattern is evaluated given the captured environment of assigned variables.
 The evaluation is dependent in which type of expression is specified
 and is done as follows:
 
@@ -224,3 +182,49 @@ and is done as follows:
   \item[Failure] We simply throw an exception with the given message
     if a failure statement is met.
 \end{description}
+
+\subsection{Tomato - Simplified JML}
+\label{sub:Tomato-SimplifiedJML}
+
+To represent contracted software we have chosen to create a subset of the
+Java Modelling Language called Tomato,
+which focuses primarily on interface-specific parts. 
+Tomato is a specific DSL implementation of our general Programming-by-Contract output model, and thus has the same set of features
+namely preconditions, postconditions and invariants.
+
+\subsubsection{Representing Logical Expressions}
+\label{sub:Representing Logical Expressions}
+The base for the supported contracting features are logical expressions, that express
+the success of a condition.
+To allow the same type of expressiveness as in Java, we support all pure
+logical expressions. This is expressions that do not have any side effects and can be judged as Boolean.
+Furthermore, Tomato similarly to JML \cite{leavens2006design},
+supports extensions that allow formulation of more complicated
+expressions such as implications and quantifiers,
+and those that specify change in the state of an object such as \textbackslash result
+and \textbackslash old($\cdot$).
+
+\begin{lstlisting}[language=Java,caption={Contracted Method for Adding Natural Numbers},label={lst:jmlexample}]
+  class Calculator {
+    //@ requires input_1 > 0
+    //@ requires input_2 > 0
+    //@ ensures \result == input_1 + input_2
+    //@ ensures \result > 0
+    public /*@ pure @*/ int add(int input_1, int input_2) { ... }
+  }
+\end{lstlisting}
+
+\subsubsection{Preconditions and Postconditions}
+\label{sub:Preconditions and Postconditions}
+
+As the idea with code contracting is the specification of the behavior of
+an object, Tomato allows specification of pre- and postconditions of methods.
+Preconditions specify which prerequisites the caller of a method must
+satisfy in order for the method to succeed and fulfil it's postcondition.
+Preconditions in Tomato are declared using the \emph{`requires'}
+keyword (see Listing~\ref{lst:jmlexample}).
+Conversely, postconditions, specified by the keyword \emph{`ensures'},
+specify which guarantees the callee of a method will give after an invocation.
+This allows the caller to predict what the method does,
+and ensures further use for subsequent preconditions.
+
