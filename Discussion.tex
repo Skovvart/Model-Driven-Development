@@ -1,29 +1,29 @@
 \section{Discussion}
-Both behavior driven development and programming by contract are very useful approaches to software development, and merging them allows for even higher quality software as well as documentation.
+Both behavior driven development and programming by contract are useful approaches to software development, and merging them allow for higher quality software and documentation.
 
-There are however several improvements that could be made to our framework.
-What is essential in our product is the ability to transform human readable text into contracts.
-This process is currently somewhat cumbersome as our transformation language has very limited capabilities for matching strings, and this makes the transformations less reusable.
-This ultimately requires more transformations to be written.
+Our framework attempted to do this, but there are several improvements that could be made to it.
+What is essential to our framework is the ability to transform human readable text into contracts and this process is currently cumbersome.
+This is because our transformation language has limited capabilities for matching text and this makes it hard to reuse transformation rules.
+The lack of reusable rules forces the need for more specialized rules to be written.
 This problem could be solved in multiple ways: 
 
-One option is allowing for better regular expressions matching as well as transformations on the matched expressions.
+One option could be to allow for better regular expression matching of text.
 This could allow for more generalizable and reusable transformation rules.
-Being able to transform the matched expressions could also potentially be used for automatic generation of parameter- and method names.
-A matched substring could be transformed according to a name scheme such as camel-case or underscore separation and be used as the name for a parameter.
+Generalizable rules also open up the possibility of transforming the matched text and using it to generate parameter- and method names.
 
 Another option is more tightly defining the language and relying less on user-provided transformations.
-This does carry the risk of losing flexibility and is not a solution we believe is worth pursuing.
+This carries the risk of losing flexibility of expression and is not an option we believe is worth pursuing.
 
-A more drastic and interesting alternative could be to use natural language processing \cite{jurafsky2002speech} to analyze the sentences and extract meaning automatically.
-This could both be used for inferring method signatures as well as code contracts.
-It would make it harder, if not impossible, to make any predictions about the quality of the generated contracts which is not desirable in many cases.
-It would most likely also require a method of overriding wrongfully interpreted contracts when discovered.
+A more drastic and interesting alternative could be to use natural language processing \cite{jurafsky2002speech} to analyze sentences and extract meaning automatically.
+This could also be used for inferring both method signatures and code contracts.
+Using natural language processing reduces predictability of the generated contracts, which can be a critical property in some systems.
+It would also require a method of overriding wrongfully interpreted contracts.
 
 Another problem is the lack of support for certain contracting features.
 Our project does not, for example, support the concept of method-purity or other contracting features such as invariants or field constraints.
-It would not be excessively hard to add some of the concepts such as method-purity and invariants, but not all programming-by-contract frameworks support some concepts such as field constraints.
-It also lacks some syntactic sugar for allowing common contract features such as non-null constraints to be expressed effectively.
+It would not be excessively hard to add some of the concepts such as invariants, but not all programming-by-contract frameworks support all concepts that JML does.
+While this is not necessarily a problem, it could mean loss of information if the framework were to support other output-languages than JML and Java in the future.
+The framework also lacks some syntactic sugar for allowing common contract features, such as non-null constraints, to be expressed effectively.
 
 Conceptionally there are also some problems with merging software constraints and natural language.
 While some concepts such as lists, stacks and integers can be expected to be known by people without computer science backgrounds, other concepts such as tuples might not, and expressing them can be hard.
