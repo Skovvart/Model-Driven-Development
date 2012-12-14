@@ -3,14 +3,16 @@ Both behavior driven development and programming by contract are useful approach
 Our framework does this, but there are some improvements that could be made.
 What is essential to our framework is the ability to transform human readable text into contracts and we are able to do this accurately, but the process could be improved to be less cumbersome.
 
-An issue with the current process lies in the fact that our transformation language has limited capabilities for matching text.
-This makes it hard to reuse transformation rules and forces the need for more specialized rules to be written.
-To improve it, there a couple of approaches.
+While our transformation language allows some re-usability, some improvements could be to further improve it.
+Currently our transformation language, Lettuce, only allows simple words or numbers to be matched as variables.
 
-\paragraph{Text-matching using regular expression.}
-One option could be to allow for text to be matched using regular expression \cite{thompson1968programming}.
-This could allow for more generalizable and reusable transformation rules.
-Matched words can already be used in contracts as variable references, but with combinations of words, some transformation may be needed, such as removing spaces and special characters.
+This can make it hard to write generalized rules, that use variables which are expressed in multiple words using natural language.
+To improve it, there are a couple of approaches.
+
+\paragraph{Text-matching using ordinary regular expression.}
+One option could be to allow for text to be matched using a more traditional form regular expression \cite{thompson1968programming}.
+This could allow for more flexible transformation rules.
+Matched words can already be used in contracts as variable references, but with combinations of words some additional transformation may be needed such as removing spaces and special characters.
 %Generalizable rules also open up the possibility of transforming matched text and using it to generate parameter- and method names.
 
 \paragraph{More strictly defined language.}
