@@ -1,6 +1,7 @@
 %% Argument why each different DSL is advantageous
-\subsection{Gherkin - Describing Features for Behavioral Driven Development}
-\label{sec:Gherkin - Describing Features for Behavioral Driven Development}
+\subsection{Extending Gherkin to Support Contracted Software}
+\label{sub:Extending Gherkin to Support Contracted Software}
+
 
 The specification of informal behaviors in our framework is done using an
 extended version of the Gherkin description language.
@@ -25,15 +26,24 @@ and consists of a series of requirement blocks and insurance blocks
      And result is a positive number
 \end{lstlisting}
 
-These requirements and insurances are written completely in
+
+These preconditions and postconditions are written completely in
 natural language, and specifies informally which contracts the corresponding
 behavior has.
 
-\subsection{Lettuce - Transforming Behaviors to Contracts}
-\label{sub:Lettuce - Transforming Behaviors to Contracts}
+\subsubsection{Keeping the Spirit of Behaviour Driven Development}
+\label{ssub:Keeping the Spirit of Behaviour Driven Development}
+By extending the Gherkin framework with only a few keywords, we have allowed the flexibility of using BDD with critical software
+while still keeping the same type of expression as there normally is. In the end it is also possible to regenerate features with
+the contract specific parts, and thus also allow reuse of existing tools.
+
+
+\subsection{Transforming Behaviors to Contracts using Lettuce}
+\label{sub:Transforming Behaviors to Contracts using Lettuce}
+
 
 In order to translate high-level informal behaviors to low-level formal
-contracts we use a small DSL called Lettuce.
+contracts we have created a small DSL called Lettuce.
 Lettuce allows direct translation of behaviors to methods,
 and rule-wise pattern based translation for translating contract expressions.
 
@@ -171,12 +181,21 @@ and is done as follows:
     if a failure statement is met.
 \end{description}
 
-\subsection{Tomato - Simplified JML}
-\label{sub:Tomato-SimplifiedJML}
+\subsubsection{Transformations as an Opportunity of Reusing Expressions}
+\label{ssub:TransformationsasanOppurtunityofReusingExpressions}
+As a consequence of having the transformation language, Lettuce,
+we allow programmers to generate templates from recurring behavior descriptions in a flexible way. This allows semi-automatising otherwise 
+routinely tasks by leveraging model-driven development, and possibly saving developer time and effort spent while increasing safety over manual
+translation.
+
+
+\subsection{Tomato -- a JML-compatible Language for the Generalized Contracted Software Model}
+\label{sub:Tomato-aJML-compatibleLanguagefortheGeneralizedContractedSoftwareModel}
+
 
 To represent contracted software we have chosen to create a subset of the
 Java Modelling Language called Tomato,
-which focuses primarily on interface-specific parts. 
+which focuses primarily on the interface-specific parts of Java.
 Tomato is a specific DSL implementation of our general Programming-by-Contract output model, and thus has the same set of features
 namely preconditions, postconditions and invariants.
 
@@ -216,3 +235,7 @@ specify which guarantees the callee of a method will give after an invocation.
 This allows the caller to predict what the method does,
 and ensures further use for subsequent preconditions.
 
+\subsubsection{Providing a Balanced Solution for Contracted Software}
+\label{ssub:ProvidingaBalancedSolutionforContractedSoftware}
+Although Tomato does not support the full suite of constructs support by JML, it provides a clean and useful way for contracting software; and because of 
+the simple model it is based on, further development of the language can easily be made to better reflect the capabilities of JML.
