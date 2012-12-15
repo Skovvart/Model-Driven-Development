@@ -15,6 +15,11 @@ The framework is based on the Cucumber BDD-framework \cite{hellesoy2012}.
 This includes extending the already existing feature description language in Cucumber with new constructs, 
 and creating a domain specific language (DSL) that specifies the mapping between natural language and formal contracts.
 The framework yields Java-files containing classes with methods that have contracts in the style specified by the Java Modeling Language (JML) \cite{leavens2006design}.
+
+Although we are testing our solution on JML, we are aiming that our framework should output to a generalized contracted software model (see Section~\ref{sub:AGeneralizedModelforContractedSoftware}) requiring
+only a specific syntax implementation for the target language. This would allow the extension of our framework in cases such as the aforementioned space shuttle,
+where a real-time contracted programming language is required such as Eiffel with SCOOP\cite{eiffel2012scoop} or C/C++ with contracting extensions\cite{digitalmars2011contractprogramming}.
+
 Our aim is to create a rule mapping language which is expressive enough to handle a study case, when evaluating the solution.
 By comparing the level of expressiveness to existing contract implementations, 
 we reflect on the feasibility of designing such a language as well as examine the possibility of using these extensions in the real world.
