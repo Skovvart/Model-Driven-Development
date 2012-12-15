@@ -26,5 +26,6 @@
 *.maf
 *.mtc
 *.mtc0
+*.swp
 Thumbs.db
 Report.tex.latexmain

@@ -20,3 +20,20 @@ please refer to “The Cucumber Book” \cite{hellesoy2012}.
 
 
 \subsection{Tools}
+The implementation of our project is done using the Eclipse Modelling Framework (EMF).
+The framework permits the use of model-driven in a complete sense from designing models to implementing transformations, and makes
+it easier to develop reusable domain specific languages (DSL) and software. Specifically we are using four parts of the framework:
+\begin{description}
+\item[Ecore] Meta-modelling language which allows the description of software models and other meta-models. Given an Ecore model, the EMF can
+  generate a complete set of tools for use with it, such as model code, test cases and eclipse editor tools. This utilizes the strengths
+  of model-driven development -- specifically modularity and re-usability, and thereby allowing the extension of Eclipse itself with small effort.
+\item[Xtext] EMF also includes a method of developing specialised DSLs with the Xtext framework. By simply specifying an LL grammar and linking to an Ecore model
+  Xtext does not only provide a parser, but also Eclipse extensions for syntax highlighting, auto-completion and serialization.
+  Xtext allows a single model to be reused in multiple DSLs. This is something which we specifically utilize in our framework,
+  in which by simply changing the serializer we can support other languages than JML.
+\item[Xtend] To transform our behaviors to contracts (see Section~\ref{sub:Evaluation of Transformation Rules}) we utilize Xtend.
+  Xtend augments Java with syntactic and declarative extensions, thereby allowing Model-to-Model transformations using a higher level of abstraction.
+\item[MWE2] The Model Workflow Engine can be used to automate transformations between models and code generation, by utilizing a simple plug-in based
+  workflow model. In our framework we have combined built-in and custom made components into a simple yet powerful workflow, which handles every detail
+  from parsing our behavior models, to generating code for contracted software.
+\end{description}
