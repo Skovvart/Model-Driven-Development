@@ -1,17 +1,19 @@
-behavior 'Checking whether the outcome is a tie-breaker'
+transform package Outcome
+
+rule tie_breaker_pure that checking whether the outcome is a tiebreaker has no side effects
+  expr 'pure'
+end
+
+rule not_null the $x has a value
+  expr '$x != null'
+end
+
+behavior 'Checking whether the outcome is a tiebreaker'
   class Outcome
   signature 'public/*@ pure @*/ boolean isTied()'
 end
 
-rule tie_breaker_pure that checking whether the outcome is a tie-breaker has no side effects
-  expr 'pure'
-end
-
-behavior 'Verify that the candidate's results match the recorded outcome'
+behavior 'Verify that the candidates results match the recorded outcome'
   class Outcome
   signature 'public boolean check(final /*@ non_null @*/ Candidate candidate, final int threshold, final int quota)'
-end
-
-rule not_null the '$x' has a value
-  expr '$x != null'
 end
