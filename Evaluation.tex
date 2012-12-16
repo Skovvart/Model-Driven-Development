@@ -17,11 +17,15 @@ The success of our evaluation depends on the level of reproducibility that we ac
  
 While we will not perform any objective tests to estimate how suited a behaviour described in natural English is in a business context, we will evaluate the generated result. We do this both qualitatively (is it precise? does it cover the original contract? are they identical?) and quantitatively (how precise? to what degree is it covered?)
  
-With respect to the quantitative measures, we wil look at a small samplet set of the contracts and generalize the results from the sample to the total set. The total set contains approximately 550 contracts of which we support about 81\%. We define the experiment as successful if we get a correct translation of at least 90\% of the contracts that we support.
+With respect to the quantitative measures, we wil look at a small samplet set of the contracts and generalize the results from the sample to the total set. The total set contains approximately 550 contracts of which we support about 81\%. We define the experiment as successful if we can translate all contracts from the sample.
 
 \subsection{Results}
 
-We chose a representative sample of contracts from the project and gave them as input to the framework. In 
+We chose a representative sample of 20 contracts from the project and gave them as input to the framework. Examples of all the contract types that we support are represented in the sample. The subsequent comparison between the Tomato output and the JML contracts showed that all contracts were identical to their original counterparts, so we conclude that the translation was successful. Furthermore, we estimate that there is a good probabilistic chance we will be able to generate 80\% of the total contract set without changing anything in the framework.
+	
+As a final remark, we note that the simple architecture of the translation language have a huge part of the responsibility for the similarity in the translation, since it can match and replace any string of the input. Even though simplicity should be favored, having to manually write Lettuce transformations to each contract can be cumbersome.
+
+
 
 
 
