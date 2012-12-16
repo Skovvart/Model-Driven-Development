@@ -11,12 +11,17 @@ This yields the following plan for our evaluation. Using a subset of an already 
 	\item Compare the Tomato code to the originial JML contracts
 \end{itemize}
 
-We have chosen to use the V\'{o}t\'{a}il project \cite{votailCochranKiniry}. V\'{o}t\'{a}il is an open-source implementation that models the electoral system in Ireland specified in Business Object Notation (BON) \cite{bonmethod} and later refined into JML.
- 
-We believe this is a suitable project to use as it is limited in size and the total set of contracts is fairly diverse in terms of complexity (simple/advanced) and type (invariants, preconditions, postconditions etc).
+We have chosen to use the V\'{o}t\'{a}il project \cite{votailCochranKiniry}. V\'{o}t\'{a}il is an open-source implementation that models the electoral system in Ireland specified in Business Object Notation (BON) \cite{bonmethod} and later refined into JML. We believe this is a suitable project to use as it is limited in size and the total set of contracts is fairly diverse in terms of complexity (simple/advanced) and type (invariants, preconditions, postconditions etc).
 
 The success of our evaluation depends on the level of reproducibility that we achieve, i.e. how well can our generated contracts capture the same semantics as their original counterparts included in the project while at the same time being generated from high-level behaviors whose semantics are understood by a non-programmer.
  
-While we will not perform any objective tests to estimate how suited a behaviour described in natural English is in a business context (we will probably give our opinion), we will evaluate the generated result. We do this both qualitatively (is it precise? does it cover the original contract? are they identical?) and quantitatively (how precise? to what degree is it covered?)
+While we will not perform any objective tests to estimate how suited a behaviour described in natural English is in a business context, we will evaluate the generated result. We do this both qualitatively (is it precise? does it cover the original contract? are they identical?) and quantitatively (how precise? to what degree is it covered?)
  
-With respect to the quantitative measures, we will state our evaluations in unit of percentage (how many of the generated contracts are adequately resembling their original counterpart to be considered successful) and set a threshold for overall success of 80\%.
+With respect to the quantitative measures, we wil look at a small samplet set of the contracts and generalize the results from the sample to the total set. The total set contains approximately 550 contracts of which we support about 81\%. We define the experiment as successful if we get a correct translation of at least 90\% of the contracts that we support.
+
+\subsection{Results}
+
+We chose a representative sample of contracts from the project and gave them as input to the framework. In 
+
+
+
