@@ -1,8 +1,12 @@
 \section{Conclusion}
-\begin{itemize}
-\item Summarize the most important outcomes
-\item Make sentences sound very strong. What should stay in reader's (examiner's) memory?
-\item Include a paragraph about future work. What is the next step in this research ?
-\item Delay writing the abstract, conclusion and the introduction to the late phases of writing
-\item Write the story first!
-\end{itemize}
+In this project we have successfully created a complete framework for transforming informal behaviors, written in natural English, to formal code contracts.
+We did this by extending an already popular BDD-based solution with small yet powerful extensions, and creating a new transformation language which
+allows for easy and reusable mappings between natural language and code contracts.
+We evaluated our framework named Salad by analyzing a subset of a real-world software project, the V\'{o}t\'{a}il electronic voting system by Dermot Cochran, and were able to successfully generate
+84.7\% equivalent JML contracts.
+
+In future development we can attempt to increase our success rate for generation of contracts by further extending the framework with concepts like invariants.
+To support more specialized concepts used by specific contracting frameworks such as JML,
+we can explore ways to extend the generalized contracted software model, possibly by using variability-based modeling \cite{czarnecki2012cool}.
+Another research possibility would be to strengthen the flexibility of the transformation language, to allow even more expressive and reusable
+mappings.
