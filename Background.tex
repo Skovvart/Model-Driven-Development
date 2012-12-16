@@ -33,7 +33,7 @@ Feature: Adding
 
 Listing \ref{lst:cucumberoutput} shows the output of running Listing \ref{lst:bddfeature} through a BDD-framework like Cucumber. These has to 
 These are called `\emph{step definitions}' and form these automated tests can be generated. 
-Note: The standard output language in Cucumber is Ruby, however, as an open source tool, the number of supported languages are constantly growing. 
+Note: The standard language in Cucumber is Ruby, however, as an open source tool, the number of supported languages are constantly growing. 
 
 \begin{lstlisting}[caption={Sample Cucumber Output},label={lst:cucumberoutput}]
 Given /^the input "([^"]*)"$/ do |arg1|
@@ -48,10 +48,8 @@ end
 \end{lstlisting}
 
 As mentioned in the introduction, instead of generating tests from features, we want to be able to generate contracts. 
-If the reader is further interested in basic feature definitions, please refer to “The Cucumber Book” \cite{hellesoy2012}.
+If the reader is further interested in feature definitions, please refer to “The Cucumber Book” \cite{hellesoy2012}.
 
-\subsection{A Generalized Model for Contracted Software}
-\label{sub:AGeneralizedModelforContractedSoftware}
 
 \subsection{Tools}
 The implementation of our project is done using the Eclipse Modelling Framework (EMF).

@@ -2,7 +2,7 @@
 While we believe that our experiment is a valuable test of the framework that gives an initial feel for its applicability, there are a couple of potential threats to validity that must be identified.
 
 \subsection{Internal Threats}
-\paragraph{Translation.}
+\subsubsection{Translation.}
 We are studying a project with existing contracts to ensure certain diversities in the input to the framework.
 Using contracts written for a specific project provides a genuineness that makes sure we do not unintentionally come up with input that we know will result in a positive test.
 On the other hand, since the code contracts from the project is not in a suitable format we need to translate them into behaviors before we give them as input to the framework.
@@ -15,7 +15,7 @@ Each stage transition will be vulnerable to translation errors, so in the end, w
 The focus of this project is on the automatic conversion between behaviors and code contracts and not on manual translation from original code contracts to behaviors in natural English. Even though the threat is definitely adherent to the project, it should not have a major impact.
 If the behavior descriptions that we create do not do 100\%  justice to the original contracts, we will be sacrificing some of the genuineness gained from studying a real world project, but it should not affect the process of being able to translate from behavior descriptions to contracts.
 
-\paragraph{Evaluation of the input behaviors.}
+\subsubsection{Evaluation of the input behaviors.}
 Our framework is intended as a shared tool for programmers and non-programmers to use for collaboration in software development.
 As such, the framework is built on what could be viewed as a three-tier architecture including code contracts, behaviors and a translation layer between them.
  
@@ -26,7 +26,7 @@ Since these competencies are not available in our team and such a test is time c
 Even though it is adherent as a threat to the project in an industrial context, we believe it is a minor threat in the scope of this report because the primary focus of the project is on behavior translation and model driven development.
 
 \subsection{External Threats}
-\paragraph{Generalizability.}
+\subsubsection{Generalizability.}
 Our framework targets behavior driven development in general, regardless of the area of application.
 Nevertheless, our experiment builds on contracts from the V\'{o}t\'{a}il project which is specifically concerned with the Irish election system.
 In order to present a thoroughly tested framework it seems reasonable to include tests on contracts from multiple domains --- e.g. software for elections, biology, the dental business and so on.

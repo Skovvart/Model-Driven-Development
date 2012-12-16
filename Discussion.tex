@@ -9,24 +9,24 @@ Currently our transformation language, Lettuce, only allows simple words or numb
 This can make it hard to write generalized rules such as those that use variables which are expressed in multiple words using natural language.
 To improve it, there are a couple of approaches.
 
-\paragraph{Text-matching using ordinary regular expression.}
+\subsubsection{Text-matching using ordinary regular expression.}
 One option could be to allow for text to be matched using a more traditional form of regular expression \cite{thompson1968programming}.
 This could allow for more flexible transformation rules.
 Matched words can already be used in contracts as variable references, but with combinations of words some additional transformation may be needed such as removing spaces and special characters.
 %Generalizable rules also open up the possibility of transforming matched text and using it to generate parameter- and method names.
 
-\paragraph{More strictly defined language.}
+\subsubsection{More strictly defined language.}
 Another option is more tightly defining the language and relying less on user-provided transformations.
 This carries the risk of losing flexibility of expression and goes against the spirit of behavior driven development.
 This is not an option we believe is worth pursuing
 
-\paragraph{Natural Language Processing.}
+\subsubsection{Natural Language Processing.}
 A more drastic and interesting alternative could be to use natural language processing \cite{jurafsky2002speech} to analyze sentences and extract meaning automatically.
 This could potentially be used for inferring both parameter- and method names as well as code contracts, and it removes the need for a translation language.
 The lack of translation language does reduce the predictability of generated contracts, which can be a critical property in some systems.
 It would also require a method of overriding wrongfully interpreted contracts, potentially reintroducing the need for a translation language.
 
-\paragraph{Another issue is the lack of support for certain contracting features.}
+\subsubsection{Another issue is the lack of support for certain contracting features.}
 Our project does not allow for all JML contracting features.
 There is for example no way to express method-purity in the behavior descriptions, and this must be done manually in the method-signature in the translation language.
 There are also other contracting features such as invariants or field constraints that are not currently supported.
@@ -34,11 +34,11 @@ It would not be hard to add some of the concepts to our project, but not all pro
 While this is not necessarily a problem now, it could mean loss of information if the framework were to support other output-languages than Java and JML in the future.
 %A nice addition to the framework could also be to add some syntactic sugar for allowing common contracts, such as non-null constraints, to be expressed more efficiently.
 
-\paragraph{Conceptionally there are also some problems with merging software constraints and natural language.}
+\subsubsection{Conceptionally there are also some problems with merging software constraints and natural language.}
 While many concepts such as lists, stacks and integers can be expected to be known by people with many different backgrounds, other concepts such as tuples might not, and expressing them effectively can be hard.
 Complex nested quantifier-contracts and the like can also be troublesome to express in natural language, though they are not impossible.
 
-\paragraph{Future possible features.}
+\subsubsection{Future possible features.}
 The framework should be made even easier to use.
 More reusable rules help this, but being able to infer method signatures would also be very useful.
 It could also be very interesting to see the results of natural language processing with regards to contracts.
