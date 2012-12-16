@@ -1,0 +1,22 @@
+class ScenarioFactory {
+	//@ requires 1 <= 'number_of_seats' 
+	//@ requires 2 <= 'number_of_outcomes' 
+	//@ requires 'method' != null 
+	//@ ensures (numberOfOutcomes == 2 ) ==> (result.getNumberOfScenarios() == 8 ) 
+	//@ ensures ( 2 < numberOfOutcomes) ==> (result.getNumberOfScenarios() <= 15 * find (numberOfOutcomes- 1 , numberOfSeats, method)) 
+	/*< AUTO GENERATED >*/
+	public/*@ pure @*/ScenarioList find(final int numberOfOutcomes, final int numberOfSeats, final /*@ non_null @*/ Method method)
+	{
+		/* TODO: Implementation */
+		throw new UnsupportedOperationException("Not Implemented");
+	}
+	//@ requires 'method' != null 
+	//@ requires 'scenarios' != null 
+	//@ ensures scenarios.getNumberOfScenarios() == 4 
+	/*< AUTO GENERATED >*/
+	protected void findBaseScenarios(final /*@ non_null @*/ Method method, final /*@ non_null @*/ ScenarioList scenarios, final boolean byeElection)
+	{
+		/* TODO: Implementation */
+		throw new UnsupportedOperationException("Not Implemented");
+	}
+}

@@ -1,21 +1,28 @@
+transform package Outcome
+
 behavior 'Generate data'
   class BallotBoxFactory
   signature 'public /*@ pure @*/ ElectionConfiguration extractBallots(/*@ non_null*/ final ElectoralScenario scenario, final int scope, final int upperBound)'
 end
 
-rule positive_number '$x' is a positive number
+rule positive_number $x is a positive number
   expr '$x > 0'
 end
 
-rule greather_than_or_equal_to '$x' is greater than or equal to '$y'
+rule greather_than_or_equal_to $x is greater than or equal to $y
   expr '$x >= $y'
 end
 
-rule not_null '$x' has a value
+rule not_null $x has a value
   expr '$x != null'
 end
 
 behavior 'Find solution'
   class BallotBoxFactory
   signature 'protected A4Solution findSolution(final /*@ non_null @*/ ElectoralScenario scenario, final int scope) throws Err, ErrorSyntax'
+end
+
+behavior 'Extract ballot'
+  class BallotBoxFactory
+  signature 'public ElectionConfiguration /*@ non_null@*/ extractBallots(final /*@ non_null */ ElectorialScenario scenario, final int scope)'
 end

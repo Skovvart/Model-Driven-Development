@@ -1,0 +1,14 @@
+class Outcome {
+	//@ ensures pure 
+	/*< AUTO GENERATED >*/ public/*@ pure @*/ boolean isTied() {
+		/* TODO: Implementation */
+		throw new UnsupportedOperationException("Not Implemented");
+	}
+	//@ requires 'candidate' != null 
+	/*< AUTO GENERATED >*/
+	public boolean check(final /*@ non_null @*/ Candidate candidate, final int threshold, final int quota)
+	{
+		/* TODO: Implementation */
+		throw new UnsupportedOperationException("Not Implemented");
+	}
+}

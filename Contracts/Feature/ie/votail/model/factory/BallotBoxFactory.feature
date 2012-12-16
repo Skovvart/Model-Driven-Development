@@ -6,7 +6,7 @@ Behavior: Generate data
   Requiring 'scope' is a positive number
   And 'upperBound' is greater than or equal to 'scope'
   And 'scenario' has a value
-  Ensuring the result has a value
+  Ensuring 'result' has a value
 
 Feature: Find the Alloy solution
   I would like to to find the Alloy solution 
@@ -18,4 +18,4 @@ Behavior: Find solution
 
 Behavior: Extract ballot
   Requiring 'scenario' has a value
-  Ensuring result has a value
+  Ensuring 'result' has a value
