@@ -4,7 +4,7 @@
 
 The specification of informal behaviors in our framework is done using an
 extended version of the Gherkin description language.
-The extensions made allows for the gradual conversion between classical step-oriented behaviors to generalized behaviors, such that they can later be translated to contracts.
+The extensions made allow for the gradual conversion between classical step-oriented behaviors to generalized behaviors, such that they can later be translated to contracts.
 
 %%% Removed BDD description, moved to Background //Søren
 
@@ -32,9 +32,9 @@ behavior has.
 
 \subsubsection{Keeping the Spirit of Behavior Driven Development}
 \label{ssub:Keeping the Spirit of Behavior Driven Development}
-By extending the Gherkin framework with only a few keywords, we have allowed the flexibility of using BDD with critical software
-while still keeping the same types of expression as can be expected of BDD. In the end it is also possible to regenerate features with
-the contract-specific parts, and thus also allow reuse of existing tools.
+By extending the Gherkin language with only a few keywords, we enable the flexibility of using BDD with critical software
+while still keeping the same level of expression as can be expected of BDD. In the end it is also possible to regenerate features with
+the contract-specific parts, and thus allow them to be served as input for existing tools.
 
 
 \subsection{Transforming Behaviors to Contracts using Lettuce}
@@ -62,18 +62,18 @@ which structure it belongs to and the actual method signature
 \end{lstlisting}
 
 The actual translation process is rather simple,
-each given behavior from the feature definition is mapped to the
-specified class with the specified signature. Then each of its requirements
-and insurances are mapped using the defined rules and attached to the mapped
-method (see Section~\ref{sub:RewritingSentencestoLogicalExpressions}).
+each behavior from the feature definition is mapped to the
+corresponding class with the specified signature. Then each of its pre- 
+and postconditions are mapped using the defined rules and attached to the mapped
+method.
 
 \subsubsection{Rewriting Sentences to Logical Expressions}
 \label{sub:RewritingSentencestoLogicalExpressions}
 
-In many ways, except for the semantic of usage,
+In many ways expressions for
 preconditions and postconditions are similar in the way they are constructed.
 As such we have made it possible for our transformation language to translate
-to logical expression directly with the semantic of usage being determined by
+to logical expression directly with the type of semantic being determined by
 the behavior descriptions. 
 This allows the reuse of many of the transformations rules the user has written.
 
@@ -98,18 +98,22 @@ This allows the reuse of many of the transformations rules the user has written.
   rule sum the $sum is the sum of $input1 and $input2
     expr '$sum == $input1 + $input2'
   end
+
+  rule pattern_valid there exist exactly one $x in the patterns which matches string $y
+    fail 'Exist exactly one construcs are unsupported'
+  end
 \end{lstlisting}
 
-A transformation rule has two main components: the pattern which a given
+A transformation rule has two main components: a pattern which a given
 string should match and a body expression which defines how the
 text should be transformed (see Listing~\ref{lst:ruleexample}).
-To allow rules to reference each other, each rules must additionally be
+To allow cross-referencing between rules, each rule must additionally be
 given a unique identifier.
 
 \paragraph{Patterns}
 \label{par:Patterns}
 
-To find the fitting transformation for a given string description
+To find the matching transformation for a given string description
 (written in either a requirement block or an ensuring block), we allow the
 definition of patterns which describes the appearance of the string.
 A pattern is composed of a series of exact strings, or variables,
@@ -123,16 +127,17 @@ resulting in that a sub-pattern can be matched at most once.
 
 \paragraph{Transformation Expressions}
 \label{par:Transformation Expressions}
-While patterns specify which patterns are matched, transformation expressions
+While patterns specify how strings are matched, transformation expressions
 specify how to translate a given pattern to a formal logical expression.
 In our language we support four kinds of transformation expressions:
-generation, forwarding, conditional and failure (see Listing~\ref{lst:ruleexample}. for the first three).
-Generation is written with the keyword `expr'
+generation, forwarding, conditional and failure (see Listing~\ref{lst:ruleexample}).
+
+Generation is written with the keyword `\emph{expr}'
 followed by the string which should be generated on output, where variables
 in that string are replaced by the words captured in the pattern.
 Forwarding permits a rule to refer to previously written rules that should further handle the
 transformations and thus enhances re-usability.
-A forward expressions is written with the keyword `match',
+A forward expressions is written with the keyword `\emph{match}',
 followed by the name of the rule that should handle further transformations,
 and in the end a series of assignments to the variables of the forwarded
 rules patterns.
@@ -153,7 +158,7 @@ The process of evaluating a feature description using the transformation rules r
 \end{enumerate}
 To accommodate the first part of the process we translate each pattern to a
 similar named regular expression. As an example take the pattern string of rule positive from Listing~\ref{lst:ruleexample}, it will be translated 
-from \textit{\$input is a positive number} to \textit{\textbackslash s*+(?\textless input\textgreater\textbackslash S+)\textbackslash s* is a positive number}.
+to \textit{\$input is a positive number} to \textit{\textbackslash s*+(?\textless input\textgreater\textbackslash S+)\textbackslash s* is a positive number}.
 
 Then we try to match the string with each pattern until we succeed,
 and then each variable in the pattern is captured into an environment
@@ -183,7 +188,7 @@ and is done as follows:
 \label{ssub:TransformationsasanOppurtunityofReusingExpressions}
 As a consequence of having the transformation language, Lettuce,
 we allow programmers to generate templates from recurring behavior descriptions in a flexible way. This allows semi-automatizing otherwise 
-routinely tasks by leveraging model-driven development, and possibly saving developer time and effort spent while increasing safety over manual
+routinely tasks by leveraging model-driven development, thus possibly saving developer time and effort spent while increasing safety over manual
 translation.
 
 
@@ -235,5 +240,5 @@ and ensures further use for subsequent preconditions.
 
 \subsubsection{Providing a Balanced Solution for Contracted Software}
 \label{ssub:ProvidingaBalancedSolutionforContractedSoftware}
-Although Tomato does not support the full suite of constructs support by JML, it provides a clean and useful way for contracting software; and because of 
+Although Tomato does not support the full suite of constructs supported by JML, it provides a clean and useful way for contracting software; and because of 
 the simple model it is based on, further development of the language can easily be made to better reflect the capabilities of JML.

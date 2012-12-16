@@ -3,9 +3,8 @@
 
 \subsection{Behavior Driven Development}
 \label{sub:bdd}
-Behavior Driven Development is a fairly recent software development process. 
-It is based on Test Driven Development (TDD) and developed by Dan North as a response to his own annoyance over repeated misunderstandings when using TDD because of not knowing the behavior of the software as wished by stakeholders until late in the development process \cite{north2006}. 
-The main goal of BDD is to allow for better communication and collaboration between stakeholders and developers through specifying behaviors from which tests can be automatically generated. 
+Behavior Driven Development is a fairly recent software development process, which is 
+based on Test Driven Development (TDD).
 
 The main component of BDD is called a feature. 
 A feature is a part of a software system,
@@ -17,7 +16,7 @@ Moreover feature descriptions allow specification of a background clause,
 as a way to set the general context for the specific scenarios.
 
 Listing \ref{lst:bddfeature} shows a simple example of a feature that describes the scenario of addition. 
-The title, `\emph{Adding}', is followed by the background and a scenario. The keywords in the scenario definition `\emph{Given}', `\emph{When}' and `\emph{Then}' respectively specifies the needed state, the action performed and the outcome of the scenario. 
+The title, `\emph{Adding}', is followed by the summary and a scenario. The keywords in the scenario definition `\emph{Given}', `\emph{When}' and `\emph{Then}' respectively specifies the needed state, the action performed and the outcome of the scenario. 
 Several `\emph{Given}', `\emph{When}' and `\emph{Then}' blocks are concatenated with the keyword `\emph{And}'.
 
 \begin{lstlisting}[caption={Sample Addition Feature},label={lst:bddfeature}]
@@ -32,8 +31,8 @@ Feature: Adding
      Then the output should be "4"
 \end{lstlisting}
 
-Listing \ref{lst:cucumberoutput} shows the output of running Listing \ref{lst:bddfeature} through a BDD-framework like Cucumber. These has to 
-These are called `\emph{step definitions}' and form these automated tests can be generated. 
+Listing \ref{lst:cucumberoutput} shows the output of running Listing \ref{lst:bddfeature} through a BDD-framework like Cucumber.
+These are called `\emph{step definitions}' and from these, automated tests can be generated. 
 Note: The standard language in Cucumber is Ruby, however, as an open source tool, the number of supported languages are constantly growing. 
 
 \begin{lstlisting}[caption={Sample Cucumber Output},label={lst:cucumberoutput}]
@@ -57,15 +56,15 @@ The implementation of our project is done using the Eclipse Modelling Framework 
 The framework permits the use of model-driven development in a complete sense from designing models to implementing transformations, and makes
 it easier to develop reusable domain specific languages (DSL) and software. Specifically we are using four parts of the framework:
 \begin{description}
-\item[Ecore] Meta-modelling language which allows the description of software models and other meta-models. Given an Ecore model, the EMF can
-  generate a complete set of tools for use with it, such as model code, test cases and eclipse editor tools. This utilizes the strengths
+\item[Ecore] Meta-modelling language which allows the description of software models and meta-models. Given an Ecore model, the EMF can
+  generate a complete set of tools for use within it, such as model code, test cases and Eclipse editor tools. This utilizes the strengths
   of model-driven development -- specifically modularity and re-usability, and thereby allowing the extension of Eclipse itself with small effort.
-\item[Xtext] EMF also includes a method of developing specialised DSLs with the Xtext framework. By simply specifying an LL grammar and linking to an Ecore model
+\item[Xtext] EMF also includes a method of developing specialised DSLs called Xtext. By simply specifying an LL grammar and linking to an Ecore model,
   Xtext does not only provide a parser, but also Eclipse extensions for syntax highlighting, auto-completion and serialization.
-  Xtext allows a single model to be reused in multiple DSLs. This is something which we specifically utilize in our framework,
+  Furthermore, Xtext allows a single model to be reused in multiple DSLs. This is something which we specifically utilize in our framework,
   in which by simply changing the serializer we can support other languages than JML.
 \item[Xtend] To transform our behaviors to contracts (see Section~\ref{sub:Evaluation of Transformation Rules}) we utilize Xtend.
-  Xtend augments Java with syntactic and declarative extensions, thereby allowing Model-to-Model transformations using a higher level of abstraction.
+  Xtend is a programming language that augments Java with syntactic and declarative extensions, thereby allowing Model-to-Model transformations using a higher level of abstraction.
 \item[MWE2] The Model Workflow Engine can be used to automate transformations between models and code generation, by utilizing a simple plug-in based
   workflow model. In our framework we have combined built-in and custom made components into a simple yet powerful workflow, which handles every detail
   from parsing our behavior models, to generating code for contracted software.
