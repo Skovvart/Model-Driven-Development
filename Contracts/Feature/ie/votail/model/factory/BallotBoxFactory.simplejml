@@ -1,0 +1,28 @@
+class BallotBoxFactory {
+	//@ requires 'scope' > 0 
+	//@ requires 'upperBound' >= 'scope' 
+	//@ requires 'scenario' != null 
+	//@ ensures 'result' != null 
+	/*< AUTO GENERATED >*/
+	public /*@ pure @*/ ElectionConfiguration extractBallots(/*@ non_null*/ final ElectoralScenario scenario, final int scope, final int upperBound)
+	{
+		/* TODO: Implementation */
+		throw new UnsupportedOperationException("Not Implemented");
+	}
+	//@ requires 'scope' > 0 
+	//@ requires 'scenario' != null 
+	/*< AUTO GENERATED >*/
+	protected A4Solution findSolution(final /*@ non_null @*/ ElectoralScenario scenario, final int scope) throws Err, ErrorSyntax
+	{
+		/* TODO: Implementation */
+		throw new UnsupportedOperationException("Not Implemented");
+	}
+	//@ requires 'scenario' != null 
+	//@ ensures 'result' != null 
+	/*< AUTO GENERATED >*/
+	public ElectionConfiguration /*@ non_null@*/ extractBallots(final /*@ non_null */ ElectorialScenario scenario, final int scope)
+	{
+		/* TODO: Implementation */
+		throw new UnsupportedOperationException("Not Implemented");
+	}
+}
