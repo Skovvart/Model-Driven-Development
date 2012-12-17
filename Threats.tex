@@ -1,6 +1,6 @@
 \section{Threats to Validity}
 \label{sec:Threats}
-While we believe that our experiment is a valuable test of the framework that gives an initial feel for its applicability, there are a couple of potential threats to validity that must be identified.
+While we believe that our experiment is a valuable test of the framework that gives an initial feel for its applicability, there are a couple of potential threats to validity.
 
 \subsection{Internal Threats}
 \subsubsection{Translation.}
@@ -9,22 +9,22 @@ Using contracts written for a specific project provides a genuineness that makes
 On the other hand, since the code contracts from the project is not in a suitable format we need to translate them into behaviors before we give them as input to the framework.
  
 This poses the risk that something will be lost in translation.
-As we are not the authors of the contracts we cannot be sure to capture all the semantics that were originally intended.
-In the end, the contracts will have traveled from the authors mind, to code, to our minds, to features written in natural English, translated with the use of our transformation language to finally turn into contracts again.
+As we are not the authors of the contracts we cannot be sure to capture all the semantics that were originally put in them.
+In the end, the contracts will have traveled from the authors mind, to code, to our minds, to features written in natural English and finally they will be transformed back into contracts using the Salad framework.
 Each stage transition will be vulnerable to translation errors so we must take care and try to only note the errors that was produced by our framework when we evaluate it.
  
-The focus of this project is on the automatic conversion between behaviors and code contracts and not on manual translation from original code contracts to behaviors in natural English. Even though the threat is definitely adherent to the project, it should not have a major impact.
-If the behavior descriptions that we create do not do 100\%  justice to the original contracts, we will be sacrificing some of the genuineness gained from studying a real world project, but it should not affect the process of being able to translate from behavior descriptions to contracts.
+The focus of this project is on the automatic conversion from behaviors to code contracts and not on manual translation from original code contracts to behaviors in natural English. Even though the threat is definitely adherent to the project, it should not have a major impact as we try give it the right amount as the project progresses.
+If the behavior descriptions that we create do not do 100\%  justice to the original contracts, we will be sacrificing some of the genuineness gained from studying a real world project, at worst. It should therefore not affect the framework's ability to translate from behaviors to contracts.
 
 \subsubsection{Evaluation of the input behaviors.}
 Our framework is intended as a shared tool for programmers and managers to use for collaboration in software development.
 As such, the framework is built on what could be viewed as a three-tier architecture including code contracts, behaviors and a translation layer between them.
  
 We use the V\'{o}t\'{a}il project to argue for the quality of the code contracts and we can argue for the quality of the translation simply by comparing the result of the conversion directly to the original contract.
-It seems reasonable to require that we also evaluate the applicability of the behaviors forming the input to the conversion in a business context --- however, doing so would require some involvement from a user who (a) is a manager and (b) is unfamiliar with the behavior language and its implementation to act as an unbiased test-person.
+It seems reasonable to require that we also evaluate the applicability of the behaviors forming the input to the conversion in a business context --- however, doing so would require some involvement from a user who (a) is a manager and (b) is unfamiliar with the behavior language and its implementation (to act as an unbiased test-person).
 
-Since these competencies are not available in our team and such a test is time consuming to conduct, we restrict ourselves to mention it as a potential threat to validity.
-Even though it is adherent as a threat to the project in an industrial context, we believe it is a minor threat in the scope of this report because the primary focus of the project is on behavior translation and model driven development.
+Since these competencies are not available in our team and since such a test is time consuming to conduct, we restrict ourselves to mention it as a potential threat to validity.
+Even though it is adherent as a threat to the project in an industrial context, we believe it is a minor threat in the scope of this project because the primary focus is on behavior translation and model driven development.
 
 \subsection{External Threats}
 \subsubsection{Generalizability.}
@@ -33,10 +33,10 @@ Nevertheless, our experiment builds on contracts from the V\'{o}t\'{a}il project
 In order to present a thoroughly tested framework it seems reasonable to include tests on contracts from multiple domains --- e.g. software for elections, biology, the dental business and so on.
 Otherwise we cannot claim the results of the evaluation to be statistically representative for all domains.
  
-It seems even more relevant because the kind of contracts we work with involves a natural language dimension and natural language usually includes some business specific terminologies, as opposed to mathematical operators used in regular code contracts.
+It seems even more relevant because the kind of contracts we work with involves a natural language dimension and natural language usually includes some domain specific terminologies, as opposed to mathematical operators used in regular code contracts.
  
 A property of our framework that keeps this threat to a minimum is that we include a simple, but flexible translation language that specifies how each behavior is translated into code.
 Since each behavior translation is specified individually we have a lot of control over the process, so it is hard to imagine a behavior that would not work with our framework even though it might come from another domain than the V\'{o}t\'{a}il project.
  
-This argument, along with the fact that we chose to focus on the translation lowers the intensity of the threat so much that we will not pay it a lot of attention.
-In an industrial context, the importance of this threat is of course significantly higher.
+This argument, along with the fact that we chose to focus on the translation, lowers the intensity of the threat so much that we will not pay it a lot of attention.
+In an industrial context, the importance of this threat is of course significantly higher though.

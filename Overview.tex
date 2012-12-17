@@ -3,21 +3,21 @@
 
 In order to pursue the goal of introducing contracts to BDD, we introduce the Salad Framework. Salad contains three DSLs --- each with a specific purpose.
 
-Gherkin is the BDD feature specification language, Lettuce is the transformation language and lastly, Tomato is a simplified version of JML.  Combined, they make it possible for contracts to be extracted and generated from feature descriptions and transformed into JML. Figure \ref{fig:saladoverview} illustrates the workflow from input to output.
+Gherkin is the BDD feature specification language, Lettuce is the transformation language and lastly, Tomato is a simplified version of JML.  Combined, they make it possible for contracts to be generated from feature descriptions and transformed into JML. Figure \ref{fig:saladoverview} illustrates the workflow from input to output.
 
 \begin{figure}
   \begin{center}
-    \includegraphics[scale=0.35]{images/framework_overview.png}
+    \includegraphics[scale=0.32]{images/framework_overview.png}
   \end{center}
   \caption{Salad Framework Overview}
   \label{fig:saladoverview}
 \end{figure}
 
 The Feature Model represents our extension of the feature language.
-As a goal, we aim to provide extensions that allows current users of BDD to use
+As a goal, we aim to provide extensions that allow current users of BDD to use
 our language without much training.
 
-Lettuce specifies how behaviors can be transformed into code contracts
+Lettuce specifies how behaviors can be transformed into code contracts.
 By specifying rules on how contracts are interpreted, the user decides the translation semantics of the natural language which represents the contracts. 
 
 Through model-to-model transformation, the feature model(s) and the transform model(s) are transformed into a generalized contracted software model representing contracts describing the pre- and postconditions. 

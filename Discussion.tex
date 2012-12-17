@@ -4,7 +4,6 @@ Both behavior driven development and programming by contract are useful approach
 Our framework does this, but there are some improvements that could be made.
 What is essential to our framework is the ability to transform human readable text into contracts and we are able to do this accurately, but the process could be improved to be less cumbersome.
 
-While our transformation language allows some re-usability, some improvements could be made to further improve it.
 Currently our transformation language, Lettuce, only allows simple words or numbers to be matched as variables.
 
 This can make it hard to write generalized rules such as those that use variables which are expressed in multiple words using natural language.
@@ -18,21 +17,21 @@ Matched words can already be used in contracts as variable references, but with 
 
 \subsubsection{More Strictly Defined Language}
 Another option is more tightly defining the language and relying less on user-provided transformations.
-This carries the risk of losing flexibility of expression and goes against the spirit of behavior driven development.
+This carries the risk of losing flexibility of expression and goes against the spirit of BDD.
 This is not an option we believe is worth pursuing
 
 \subsubsection{Natural Language Processing}
 A more drastic and interesting alternative could be to use natural language processing \cite{jurafsky2002speech} to analyze sentences and extract meaning automatically.
 This could potentially be used for inferring both parameter- and method names as well as code contracts, and it removes the need for a translation language.
-The lack of translation language does reduce the predictability of generated contracts, which can be a critical property in some systems.
+The lack of translation language reduces the predictability of generated contracts, which can be a critical property in some systems.
 It would also require a method of overriding wrongfully interpreted contracts, potentially reintroducing the need for a translation language.
 
 \subsubsection{Lack of Support for Certain Contracting Features}
-Our project does not allow for all JML contracting features.
-There is for example no way to express method-purity in the behavior descriptions, and this must be done manually in the method-signature in the translation language.
+Our project does not support all JML contracting features.
+E.g. there is no way to express method-purity in the behavior descriptions, and this must be done manually in the method signature in the translation language.
 There are also other contracting features such as invariants or field constraints that are not currently supported.
 It would not be hard to add some of the concepts to our project, but not all programming-by-contract frameworks support the same concepts as JML.
-While this is not necessarily a problem now, it could mean loss of information if the framework were to support other output-languages than Java and JML in the future.
+While this is not necessarily a problem now, it could mean loss of information if the framework were to support other output-languages than JML in the future.
 %A nice addition to the framework could also be to add some syntactic sugar for allowing common contracts, such as non-null constraints, to be expressed more efficiently.
 
 \subsubsection{Conceptual Issues} 
@@ -42,13 +41,12 @@ Complex nested quantifier-contracts and the like can also be troublesome to expr
 
 \subsubsection{Future Possible Features}
 There are a number of factors which could make the framework even easier to use.
-More reusable rules help this, but being able to infer method signatures would also be very useful.
+E.g. being able to infer method signatures, in stead of writing them manually, would be very useful.
 
-A current problem with method signatures is that they are defined in one language, where our model-to-model transformation could otherwise be used
-for multiple target languages.
+A current problem with method signatures is that they are defined in one language, where our model-to-model transformation could be used
+with multiple target languages.
 An idea would be to have a standard method signature description, which is mapped to specific language syntax in the custom serializers.
 This is further complicated by advanced features such as generics or annotations.
 
 It could also be very interesting to see the results of natural language processing with regards to contracts.
-While it would reduce predictability of the contracts, this is not of critical importance in all projects.
 If the quality of the inferred contracts is good enough, it could reduce the workload immensely by removing the need to write transformations manually.

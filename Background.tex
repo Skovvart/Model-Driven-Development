@@ -3,14 +3,11 @@
 
 \subsection{Behavior Driven Development}
 \label{sub:bdd}
-Behavior Driven Development is a fairly recent software development process, which is 
-based on Test Driven Development (TDD).
+Behavior Driven Development is a fairly recent software development process, based on Test Driven Development (TDD).
 
 The main component of BDD is called a feature. 
 A feature is a part of a software system,
-which can be specified by a range of specific behaviors called scenarios.
-Such scenarios can be either specific consisting solely of a range of
-assumptions and assertions, or be outlined in a way that allows
+which can be specified by a range of specific behaviors called scenarios. Scenarios can be either specific, consisting solely of a range of assumptions and assertions, or be outlined in a way that allows
 specification of a range of different example inputs.
 Moreover feature descriptions allow specification of a background clause,
 as a way to set the general context for the specific scenarios.
@@ -22,7 +19,7 @@ Several `\emph{Given}', `\emph{When}' and `\emph{Then}' blocks are concatenated 
 \begin{lstlisting}[caption={Sample Addition Feature},label={lst:bddfeature}]
 Feature: Adding
  In order to avoid mistakes 
- As a accountant
+ As an accountant
  I want to be told the sum of two numbers
 
    Scenario: Add two numbers
@@ -56,16 +53,16 @@ The implementation of our project is done using the Eclipse Modelling Framework 
 The framework permits the use of model-driven development in a complete sense from designing models to implementing transformations, and makes
 it easier to develop reusable domain specific languages (DSL) and software. Specifically we are using four parts of the framework:
 \begin{description}
-\item[Ecore] Meta-modelling language which allows the description of software models and meta-models. Given an Ecore model, the EMF can
+\item[Ecore] Meta-modelling language which allows the description of software models and meta-models. Given an Ecore model, EMF can
   generate a complete set of tools for use within it, such as model code, test cases and Eclipse editor tools. This utilizes the strengths
-  of model-driven development -- specifically modularity and re-usability, and thereby allowing the extension of Eclipse itself with small effort.
+  of model-driven development -- specifically modularity and re-usability, thereby allowing the extension of Eclipse itself with small efforts.
 \item[Xtext] EMF also includes a method of developing specialised DSLs called Xtext. By simply specifying an LL grammar and linking to an Ecore model,
   Xtext does not only provide a parser, but also Eclipse extensions for syntax highlighting, auto-completion and serialization.
-  Furthermore, Xtext allows a single model to be reused in multiple DSLs. This is something which we specifically utilize in our framework,
-  in which by simply changing the serializer we can support other languages than JML.
-\item[Xtend] To transform our behaviors to contracts (see Section~\ref{sub:Evaluation of Transformation Rules}) we utilize Xtend.
+  Furthermore, Xtext allows a single model to be reused in multiple DSLs. This is something we specifically utilize in our framework,
+  in which we can support other languages than JML by simply changing the serializer.
+\item[Xtend] To transform our behaviors to contracts (see Section~\ref{sub:Evaluation of Transformation Rules}) we use Xtend.
   Xtend is a programming language that augments Java with syntactic and declarative extensions, thereby allowing Model-to-Model transformations using a higher level of abstraction.
-\item[MWE2] The Model Workflow Engine can be used to automate transformations between models and code generation, by utilizing a simple plug-in based
-  workflow model. In our framework we have combined built-in and custom made components into a simple yet powerful workflow, which handles every detail
+\item[MWE2] The Model Workflow Engine can be used for code generation and to automate transformations between models, by utilizing a simple plug-in based
+  workflow model. In our framework we have combined built-in and custom made components in a simple yet powerful workflow, that handles every detail
   from parsing our behavior models, to generating code for contracted software.
 \end{description}

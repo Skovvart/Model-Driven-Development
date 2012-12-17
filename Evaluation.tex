@@ -2,9 +2,9 @@
 \label{sec:Evaluation}
 \subsection{Method}
 
-We evaluate and test the implementation of our framework for behavior-driven development by means of a case study of a project created with accompanying contracts which we can rewrite to behaviors in natural English. On the basis of these behaviors we can use our framework to generate low level code contracts and then compare the results to the original contracts included in the project.
+We evaluate and test the implementation of our BDD framework by means of a case study of a project created with accompanying contracts which we can rewrite to behaviors in natural English. On the basis of these behaviors we can use our framework to generate code contracts and then compare the results to the original JML contracts included in the project.
  
-This yields the following plan for our evaluation. Using a subset of an already existing system with code contracts, we execute the following steps:
+This yields the following plan for our evaluation. Using a subset of code contracts from the existing project, we execute the following steps:
 
 \begin{itemize}
 	\item Convert contracts into extended Gherkin
@@ -12,19 +12,17 @@ This yields the following plan for our evaluation. Using a subset of an already 
 	\item Compare the Tomato code to the originial JML contracts
 \end{itemize}
 
-We have chosen to use the V\'{o}t\'{a}il project \cite{votailCochranKiniry}. V\'{o}t\'{a}il is an open-source implementation that models the electoral system in Ireland specified in Business Object Notation (BON) \cite{bonmethod} and later refined into JML. We believe this is a suitable project to use as it is limited in size and the total set of contracts is fairly diverse in terms of complexity and type (invariants, preconditions, postconditions etc).
+We have chosen to use the V\'{o}t\'{a}il project \cite{votailCochranKiniry}. V\'{o}t\'{a}il is an open source implementation that models the electoral system in Ireland specified in Business Object Notation (BON) \cite{bonmethod} and was later refined into JML. We believe this is a suitable project to use as it is limited in size and the total set of contracts is fairly diverse in terms of complexity and type (invariants, preconditions, postconditions etc).
 
-The success of our evaluation depends on the level of reproducibility that we achieve, i.e. how well can our 0enerated contracts capture the same semantics as their original counterparts included in the project while at the same time being generated from high-level behaviors whose semantics are understood by a non-programmer.
+The success of our evaluation depends on the level of reproducibility that we achieve, i.e. how well can our generated contracts capture the same semantics as their original counterparts included in the project while at the same time being generated from high-level behaviors whose semantics are understood by a non-programmer.
  
 While it is hard to perform completely objective tests to estimate how suited a behaviour described in natural English is in a business context, we will nonetheless evaluate the quality of the generated result as good as possible. We do this both qualitatively (is it precise? does it cover the original contract? are they identical?) and quantitatively (how precise? to what degree is it covered?)
  
-With respect to the quantitative measures, we wil look at a small samplet set of the contracts and generalize the results from the sample to the total set. The total set contains approximately 550 contracts of which we support about 80\%. We define the experiment as successful if we can translate all contracts from the sample.
+With respect to the quantitative measures, we wil look at a small samplet set of the contracts and generalize the results from the sample to the total set. The total set contains approximately 550 contracts of which we support about 84\%. We define the experiment as successful if we can translate all contracts from the sample.
 
 \subsection{Results}
 
-We chose a representative sample of contracts from the project as input to the framework. Examples of all the contract types that we support are represented in the sample. The subsequent comparison between the Tomato output and the JML contracts showed that all contracts were equivalent to their original counterparts, so we conclude that the translation was successful. Furthermore, we estimate that there is a good probabilistic chance we will be able to generate 84.7\% of the total contract set without changing anything in the framework.
-	
-As a final remark, we note that the simple architecture of the translation language have a huge part of the responsibility for the similarity in the translation, since it can match and replace any string of the input.
+We choose a representative sample of contracts from the project as input to the framework. Examples of all the contract types that we support are represented in the sample. The subsequent comparison between the Tomato output and the JML contracts showed that all contracts were equivalent to their original counterparts, so we conclude that the translation was successful. Furthermore, we estimate that there is a good probabilistic chance we will be able to generate 84.7\% of the total contract set without changing anything in the framework.
 
 
 
